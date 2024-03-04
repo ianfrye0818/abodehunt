@@ -1,11 +1,24 @@
-'use client';
-export default function HeroSearchForm() {
+import Test from '@/models/TestModel';
+import mongoose from 'mongoose';
+
+export default async function HeroSearchForm() {
+  // const handleSubmit = async (formData: FormData) => {
+  //   'use server';
+  //   const location = formData.get('location');
+  //   mongoose
+  //     .connect(process.env.MONGO_URI!)
+  //     .then(async () => {
+  //       console.log('Connected to MongoDB');
+  //       const test = await Test.create({ location });
+  //       console.log(test);
+  //     })
+  //     .catch((error) => console.error(error))
+  //     .finally(() => mongoose.disconnect());
+  // };
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log('Search form submitted');
-      }}
+      // action={handleSubmit}
       className='mt-3 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center'
     >
       <div className='w-full md:w-3/5 md:pr-2 mb-4 md:mb-0'>
@@ -18,6 +31,7 @@ export default function HeroSearchForm() {
         <input
           type='text'
           id='location'
+          name='location'
           placeholder='Enter Location (City, State, Zip, etc'
           className='w-full px-4 py-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-500'
         />
