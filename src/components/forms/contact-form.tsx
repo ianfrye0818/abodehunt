@@ -4,35 +4,30 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { handleContactFormSubmit } from '@/actions/actions';
 import { FaPaperPlane } from 'react-icons/fa';
-import { useFormState, useFormStatus } from 'react-dom';
-export type contactFormData = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { contactFormDataSchema } from '@/lib/schema';
 
-const initialState: contactFormData = {
-  name: '',
-  email: '',
-  phone: '',
-  message: '',
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button disabled={pending}>
-      <FaPaperPlane />
-      Send Message
-    </button>
-  );
-}
+type contactFormInputs = z.infer<typeof contactFormDataSchema>;
 
 export default function ContactForm() {
-  const [state, formAction] = useFormState(handleContactFormSubmit, initialState);
+  const {
+    handleSubmit,
+    register,
+    reset,
+
+    formState: { isSubmitting, errors },
+  } = useForm<contactFormInputs>({ resolver: zodResolver(contactFormDataSchema) });
+
+  const onSubmit = async (data: contactFormInputs) => {
+    const response = await handleContactFormSubmit(data);
+    console.log(response);
+    reset();
+  };
+
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}>
       <div className='mb-4'>
         <Label
           className='block text-gray-700 text-sm font-bold mb-2'
@@ -45,7 +40,9 @@ export default function ContactForm() {
           id='name'
           type='text'
           placeholder='Enter your name'
+          {...register('name')}
         />
+        {errors.name && <p className='text-red-500 text-sm my-2'>{errors.name.message}</p>}
       </div>
       <div className='mb-4'>
         <Label
@@ -57,9 +54,11 @@ export default function ContactForm() {
         <Input
           className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           id='email'
-          type='email'
+          type='text'
           placeholder='Enter your email'
+          {...register('email')}
         />
+        {errors.email && <p className='text-red-500 text-sm my-2'>{errors.email.message}</p>}
       </div>
       <div className='mb-4'>
         <Label
@@ -73,7 +72,9 @@ export default function ContactForm() {
           id='phone'
           type='text'
           placeholder='Enter your phone number'
+          {...register('phone')}
         />
+        {errors.phone && <p className='text-red-500 text-sm my-2'>{errors.phone.message}</p>}
       </div>
       <div className='mb-4'>
         <Label
@@ -86,10 +87,18 @@ export default function ContactForm() {
           className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 h-44 focus:outline-none focus:shadow-outline'
           id='message'
           placeholder='Enter your message'
+          {...register('message')}
         />
+        {errors.message && <p className='text-red-500 text-sm my-2'>{errors.message.message}</p>}
       </div>
       <div>
-        <SubmitButton />
+        <button
+          disabled={isSubmitting}
+          className='flex gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline items-center'
+        >
+          <FaPaperPlane />
+          Send Message
+        </button>
       </div>
     </form>
   );

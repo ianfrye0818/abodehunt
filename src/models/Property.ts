@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 
 const PropertySchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-    },
     owner: {
       type: String,
       required: true,
