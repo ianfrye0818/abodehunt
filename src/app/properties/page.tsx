@@ -13,7 +13,7 @@ async function fetchProperties(): Promise<Property[] | undefined | null> {
 
 export default async function PropertiesPage() {
   const properties = await fetchProperties();
-  if (!properties) return null;
+  if (!properties) return <div>No Properties found</div>;
   return (
     <section className='px-4 py-6'>
       <div className='container-xl lg:container m-auto px-4 py-6'>
