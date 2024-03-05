@@ -24,8 +24,25 @@ export default function PropertyCard({ property }: PropertCardProps) {
           <h3 className='text-xl font-bold'>{property.name}</h3>
         </div>
         <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right'>
-          {property.rates.monthly?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-          /mo
+          {property.rates.monthly
+            ? property.rates.monthly.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0,
+              }) + ' / month'
+            : property.rates.weekly
+            ? property.rates.weekly.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0,
+              }) + ' / week'
+            : property.rates.nightly
+            ? property.rates.nightly.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0,
+              }) + ' / night'
+            : 'Contact for price'}
         </h3>
 
         <div className='flex justify-center gap-4 text-gray-500 mb-4'>
