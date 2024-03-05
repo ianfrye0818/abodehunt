@@ -10,12 +10,12 @@ export default function Component() {
             <h1 className='text-3xl font-extrabold tracking-tight'>Terms of Service</h1>
             <div className='space-y-2'>
               <p>
-                These terms and conditions outline the rules and regulations for the use of Example
-                Websites Website, located at https://www.example.com.
+                These terms and conditions outline the rules and regulations for the use of
+                AbodeHunt Websites Website, located at https://abodehunt.wifrye.net.
               </p>
               <p>
                 By accessing this website we assume you accept these terms and conditions. Do not
-                continue to use Example Website if you do not agree to take all of the terms and
+                continue to use AbodeHunt Website if you do not agree to take all of the terms and
                 conditions stated on this page.
               </p>
               <p>
@@ -32,26 +32,26 @@ export default function Component() {
                 taken as interchangeable and therefore as referring to same.
               </p>
               <p>
-                We employ the use of cookies. By accessing Example Website, you agreed to use
-                cookies in agreement with the Example Websites Privacy Policy. Most interactive
+                We employ the use of cookies. By accessing AbodeHunt Website, you agreed to use
+                cookies in agreement with the AbodeHunt Websites Privacy Policy. Most interactive
                 websites use cookies to let us retrieve the users details for each visit. Cookies
                 are used by our website to enable the functionality of certain areas to make it
                 easier for people visiting our website. Some of our affiliate/advertising partners
                 may also use cookies.
               </p>
               <p>
-                Unless otherwise stated, Example Website and/or its licensors own the intellectual
-                property rights for all material on Example Website. All intellectual property
-                rights are reserved. You may access this from Example Website for your own personal
-                use subjected to restrictions set in these terms and conditions.
+                Unless otherwise stated, AbodeHunt Website and/or its licensors own the intellectual
+                property rights for all material on AbodeHunt Website. All intellectual property
+                rights are reserved. You may access this from AbodeHunt Website for your own
+                personal use subjected to restrictions set in these terms and conditions.
               </p>
               <p>
                 You must not:
                 <ul className='list-disc list-inside'>
-                  <li>Republish material from Example Website</li>
-                  <li>Sell, rent or sub-license material from Example Website</li>
-                  <li>Reproduce, duplicate or copy material from Example Website</li>
-                  <li>Redistribute content from Example Website</li>
+                  <li>Republish material from AbodeHunt Website</li>
+                  <li>Sell, rent or sub-license material from AbodeHunt Website</li>
+                  <li>Reproduce, duplicate or copy material from AbodeHunt Website</li>
+                  <li>Redistribute content from AbodeHunt Website</li>
                 </ul>
               </p>
               <p>
@@ -61,17 +61,17 @@ export default function Component() {
               </p>
               <p>
                 Parts of this website offer an opportunity for users to post and exchange opinions
-                and information in certain areas of the website. Example Website does not filter,
+                and information in certain areas of the website. AbodeHunt Website does not filter,
                 edit, publish or review Comments prior to their presence on the website. Comments do
-                not reflect the views and opinions of Example Website,its agents and/or affiliates.
-                Comments reflect the views and opinions of the person who post their views and
-                opinions. To the extent permitted by applicable laws, Example Website shall not be
-                liable for the Comments or for any liability, damages or expenses caused and/or
-                suffered as a result of any use of and/or posting of and/or appearance of the
-                Comments on this website.
+                not reflect the views and opinions of AbodeHunt Website,its agents and/or
+                affiliates. Comments reflect the views and opinions of the person who post their
+                views and opinions. To the extent permitted by applicable laws, AbodeHunt Website
+                shall not be liable for the Comments or for any liability, damages or expenses
+                caused and/or suffered as a result of any use of and/or posting of and/or appearance
+                of the Comments on this website.
               </p>
               <p>
-                Example Website reserves the right to monitor all Comments and to remove any
+                AbodeHunt Website reserves the right to monitor all Comments and to remove any
                 Comments which can be considered inappropriate, offensive or causes breach of these
                 Terms and Conditions.
               </p>
@@ -97,8 +97,8 @@ export default function Component() {
                 </ul>
               </p>
               <p>
-                You hereby grant Example Website a non-exclusive license to use, reproduce, edit and
-                authorize others to use, reproduce and edit any of your Comments in any and all
+                You hereby grant AbodeHunt Website a non-exclusive license to use, reproduce, edit
+                and authorize others to use, reproduce and edit any of your Comments in any and all
                 forms, formats or media.
               </p>
               <p>
@@ -153,7 +153,7 @@ export default function Component() {
               </p>
               <p>
                 If you are one of the organizations listed in paragraph 2 above and are interested
-                in linking to our website, you must inform us by sending an e-mail to Example
+                in linking to our website, you must inform us by sending an e-mail to AbodeHunt
                 Website. Please include your name, your organization name, contact information as
                 well as the URL of your site, a list of any URLs from which you intend to link to
                 our Website, and a list of the URLs on our site to which you would like to link.
@@ -171,8 +171,8 @@ export default function Component() {
                 </ul>
               </p>
               <p>
-                No use of Example Websites logo or other artwork will be allowed for linking absent
-                a trademark license agreement.
+                No use of AbodeHunt Websites logo or other artwork will be allowed for linking
+                absent a trademark license agreement.
               </p>
               <p>
                 iFrames
