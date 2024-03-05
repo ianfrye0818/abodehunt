@@ -1,6 +1,3 @@
-import Test from '@/models/TestModel';
-import mongoose from 'mongoose';
-
 export default async function HeroSearchForm() {
   // const handleSubmit = async (formData: FormData) => {
   //   'use server';

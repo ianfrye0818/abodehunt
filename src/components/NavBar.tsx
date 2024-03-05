@@ -90,9 +90,7 @@ export default function Navbar() {
                 alt='PropertyPulse'
               />
 
-              <span className='hidden lg:block text-white text-2xl font-bold ml-2'>
-                PropertyPulse
-              </span>
+              <span className='hidden lg:block text-white text-2xl font-bold ml-2'>AbodeHunt</span>
             </Link>
             {/* <!-- Desktop Menu Hidden below md screens --> */}
             <div className='hidden md:ml-6 md:block'>

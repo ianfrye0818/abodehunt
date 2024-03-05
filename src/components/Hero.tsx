@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroSearchForm from './forms/hero-search-form';
+import InfoBoxes from './InfoBoxes';
 
 export default function Hero() {
   return (

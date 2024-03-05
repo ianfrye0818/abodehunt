@@ -2,9 +2,9 @@ import React from 'react';
 import '@/assets/styles/global.css';
 import Navbar from '@/components/NavBar';
 export const metadata = {
-  title: 'Property Pulse | Find the perfect rental',
+  title: 'AbodeHunt | Find the perfect rental',
   description:
-    'Find your next rental property with Property Pulse. Search for apartments, houses, and condos for rent in your area.',
+    'Find your next rental property with AbodeHunt. Search for apartments, houses, and condos for rent in your area.',
   keywords: 'rental, find rentals, find properties',
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
