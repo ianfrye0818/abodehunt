@@ -1,31 +1,29 @@
-'use client';
-import { useParams } from 'next/navigation';
-import properties from '@/_data/properties.json';
 import { Link } from 'lucide-react';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaPaperPlane, FaRuler, FaShare } from 'react-icons/fa';
-import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+// import { Label } from '@/components/ui/label';
+// import { Input } from '@/components/ui/input';
+// import { Textarea } from '@/components/ui/textarea';
+// import { handleContactFormSubmit } from '@/actions/actions';
+import axios from 'axios';
+import type { Property } from '@/types';
 
-type FormData = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
+// type FormData = {
+//   name: string;
+//   email: string;
+//   phone: string;
+//   message: string;
+// };
 
-export default function Property() {
-  const params = useParams();
+async function fetchProperty(id: string): Promise<Property | undefined> {
+  const property = await axios.get('http://localhost:3000/api/properties/' + id);
+  return property.data;
+}
+
+export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
-  const property = properties.find((property) => property._id === id);
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>();
+
+  const property = await fetchProperty(id);
 
   if (!property)
     return (
@@ -34,10 +32,10 @@ export default function Property() {
       </div>
     );
 
-  async function onSubmit(data: FormData) {
-    console.log(data);
-    reset();
-  }
+  // async function onSubmit(data: FormData) {
+  //   console.log(data);
+  //   reset();
+  // }
 
   return (
     <section className='bg-blue-50'>
@@ -163,7 +161,7 @@ export default function Property() {
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
-              <form onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}>
+              {/* <form action={handleContactFormSubmit}>
                 <div className='mb-4'>
                   <Label
                     className='block text-gray-700 text-sm font-bold mb-2'
@@ -256,7 +254,7 @@ export default function Property() {
                     <FaPaperPlane /> Send Message
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
           </aside>
         </div>

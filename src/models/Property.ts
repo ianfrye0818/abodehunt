@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const PropertySchema = new mongoose.Schema(
   {
+    _id: {
+      type: String,
+      required: true,
+    },
     owner: {
       type: String,
       required: true,
@@ -92,6 +96,6 @@ const PropertySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Property = mongoose.model('Property', PropertySchema);
+const Property = mongoose.models.Property || mongoose.model('Property', PropertySchema);
 
 export default Property;
