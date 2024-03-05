@@ -2,19 +2,21 @@ import { Link } from 'lucide-react';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaPaperPlane, FaRuler, FaShare } from 'react-icons/fa';
 
-import axios from 'axios';
+// import axios from 'axios';
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
+import properties from '@/_data/properties.json';
 
-async function fetchProperty(id: string): Promise<Property | undefined | null> {
-  const property = await axios.get('http://localhost:3000/api/properties/' + id);
-  return property.data;
-}
+// async function fetchProperty(id: string): Promise<Property | undefined | null> {
+//   const property = await axios.get('http://localhost:3000/api/properties/' + id);
+//   return property.data;
+// }
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
 
-  const property = await fetchProperty(id);
+  // const property = await fetchProperty(id);
+  const property = properties.find((property) => property._id === id);
 
   if (!property)
     return (

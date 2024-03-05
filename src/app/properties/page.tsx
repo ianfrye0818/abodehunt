@@ -1,18 +1,20 @@
 import PropertyCard from '@/components/PropertyCard';
-import axios from 'axios';
+// import axios from 'axios';
 import { Property } from '@/types';
 
-async function fetchProperties(): Promise<Property[] | undefined> {
-  try {
-    const response = await axios.get('http://localhost:3000/api/properties');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching properties:', error);
-  }
-}
+import properties from '@/_data/properties.json';
+
+// async function fetchProperties(): Promise<Property[] | undefined> {
+//   try {
+//     const response = await axios.get('http://localhost:3000/api/properties');
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching properties:', error);
+//   }
+// }
 
 export default async function PropertiesPage() {
-  const properties: Property[] | undefined = await fetchProperties();
+  // const properties: Property[] | undefined = await fetchProperties();
   if (!properties) return null;
   return (
     <section className='px-4 py-6'>
