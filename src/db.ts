@@ -1,14 +1,8 @@
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
 
 const connectToDB = async () => {
   try {
-    mongoose.connect(
-      process.env.MONGO_URI as string,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      } as ConnectOptions
-    );
+    mongoose.connect(process.env.MONGO_URI as string);
   } catch (error) {
     console.error(error);
   }

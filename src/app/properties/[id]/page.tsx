@@ -1,21 +1,12 @@
 import { Link } from 'lucide-react';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaPaperPlane, FaRuler, FaShare } from 'react-icons/fa';
-// import { Label } from '@/components/ui/label';
-// import { Input } from '@/components/ui/input';
-// import { Textarea } from '@/components/ui/textarea';
-// import { handleContactFormSubmit } from '@/actions/actions';
+
 import axios from 'axios';
 import type { Property } from '@/types';
+import ContactForm from '@/components/forms/contact-form';
 
-// type FormData = {
-//   name: string;
-//   email: string;
-//   phone: string;
-//   message: string;
-// };
-
-async function fetchProperty(id: string): Promise<Property | undefined> {
+async function fetchProperty(id: string): Promise<Property | undefined | null> {
   const property = await axios.get('http://localhost:3000/api/properties/' + id);
   return property.data;
 }
@@ -31,11 +22,6 @@ export default async function Property({ params }: { params: { id: string } }) {
         Error getting property <Link href='/'>Go back</Link>
       </div>
     );
-
-  // async function onSubmit(data: FormData) {
-  //   console.log(data);
-  //   reset();
-  // }
 
   return (
     <section className='bg-blue-50'>
@@ -161,100 +147,7 @@ export default async function Property({ params }: { params: { id: string } }) {
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
-              {/* <form action={handleContactFormSubmit}>
-                <div className='mb-4'>
-                  <Label
-                    className='block text-gray-700 text-sm font-bold mb-2'
-                    htmlFor='name'
-                  >
-                    Name:
-                  </Label>
-                  <Input
-                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                    id='name'
-                    type='text'
-                    placeholder='Enter your name'
-                    {...register('name', { required: 'This Feild is required' })}
-                  />
-                  {errors.name && (
-                    <span className='text-red-500 text-xs italic'>
-                      {errors.name?.message?.toString()}
-                    </span>
-                  )}
-                </div>
-                <div className='mb-4'>
-                  <Label
-                    className='block text-gray-700 text-sm font-bold mb-2'
-                    htmlFor='email'
-                  >
-                    Email:
-                  </Label>
-                  <Input
-                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                    id='email'
-                    type='email'
-                    placeholder='Enter your email'
-                    {...register('email', {
-                      required: 'This Feild is required',
-                      pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
-                    })}
-                  />
-                  {errors.email && (
-                    <span className='text-red-500 text-xs italic'>
-                      {errors.email?.message?.toString()}
-                    </span>
-                  )}
-                </div>
-                <div className='mb-4'>
-                  <Label
-                    className='block text-gray-700 text-sm font-bold mb-2'
-                    htmlFor='phone'
-                  >
-                    Phone:
-                  </Label>
-                  <Input
-                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                    id='phone'
-                    type='text'
-                    placeholder='Enter your phone number'
-                    {...register('phone', {
-                      pattern: { value: /^\d{10}$/, message: 'Invalid phone number' },
-                    })}
-                  />
-                  {errors.phone && (
-                    <span className='text-red-500 text-xs italic'>
-                      {errors.phone?.message?.toString()}
-                    </span>
-                  )}
-                </div>
-                <div className='mb-4'>
-                  <Label
-                    className='block text-gray-700 text-sm font-bold mb-2'
-                    htmlFor='message'
-                  >
-                    Message:
-                  </Label>
-                  <Textarea
-                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 h-44 focus:outline-none focus:shadow-outline'
-                    id='message'
-                    placeholder='Enter your message'
-                    {...register('message', { required: 'This Feild is required' })}
-                  />
-                  {errors.message && (
-                    <span className='text-red-500 text-xs italic'>
-                      {errors.message?.message?.toString()}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <button
-                    className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline flex items-center justify-center gap-2'
-                    type='submit'
-                  >
-                    <FaPaperPlane /> Send Message
-                  </button>
-                </div>
-              </form> */}
+              <ContactForm />
             </div>
           </aside>
         </div>
