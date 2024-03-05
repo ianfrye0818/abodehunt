@@ -1,6 +1,7 @@
 import React from 'react';
 import '@/assets/styles/global.css';
 import Navbar from '@/components/NavBar';
+import Footer from '@/components/Footer';
 export const metadata = {
   title: 'AbodeHunt | Find the perfect rental',
   description:
@@ -12,7 +13,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body>
         <Navbar />
-        <main>{children}</main>
+        <main className='min-h-screen'>{children}</main>
+        <Footer />
       </body>
     </html>
   );
