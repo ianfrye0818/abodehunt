@@ -1,7 +1,7 @@
 'use server';
+import { z } from 'zod';
 
 import { contactFormDataSchema } from '@/lib/schema';
-import { z } from 'zod';
 
 type contactFormInputs = z.infer<typeof contactFormDataSchema>;
 
