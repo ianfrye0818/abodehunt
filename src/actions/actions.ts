@@ -8,7 +8,6 @@ type contactFormInputs = z.infer<typeof contactFormDataSchema>;
 export async function handleContactFormSubmit(formdata: contactFormInputs) {
   const result = contactFormDataSchema.safeParse(formdata);
   if (result.success) {
-    console.log(result.data);
   } else {
     console.log(result.error.errors);
   }
