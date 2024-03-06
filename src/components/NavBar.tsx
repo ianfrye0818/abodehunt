@@ -211,13 +211,9 @@ export default function Navbar() {
             Add Property
           </Link>
           {!isSignedIn && (
-            <Button className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4'>
-              <i className='fa-brands fa-google mr-2'></i>
-              <span className='flex text-white items-center gap-2'>
-                <FaGoogle />
-                Login or Register
-              </span>
-            </Button>
+            <div className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
+              <SignInButton>Login</SignInButton>
+            </div>
           )}
         </div>
       </div>
