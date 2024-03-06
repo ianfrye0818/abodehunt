@@ -3,7 +3,7 @@ import Image from 'next/image';
 import logo from '@/assets/images/logo-white.png';
 import profileDefault from '@/assets/images/profile.png';
 import Link from 'next/link';
-import { FaGoogle } from 'react-icons/fa';
+import { FaGoogle, FaHeart } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -137,6 +137,12 @@ export default function Navbar() {
           {/* <!-- Right Side Menu (Logged In) --> */}
           {isSignedIn && (
             <div className='absolute inset-y-0 right-0 flex gap-5 items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0'>
+              <Link
+                href='/favorites'
+                className='rounded-full p-2 bg-white w-8 h-8'
+              >
+                <FaHeart className='text-red-600' />
+              </Link>
               <Link
                 href='/messages'
                 className='relative group'

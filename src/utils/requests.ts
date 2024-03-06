@@ -2,7 +2,7 @@ import { Property } from '@/types';
 import axios from 'axios';
 
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
-console.log(apiDomain);
+apiDomain;
 
 export async function fetchAllProperties(): Promise<Property[] | undefined | null> {
   try {
@@ -32,5 +32,43 @@ export async function fetchFeaturedProperties(): Promise<Property[] | undefined 
     return response.data;
   } catch (error) {
     console.error('Error fetching featured properties:', error);
+  }
+}
+
+// export async function fetchUsersFavoriteProperties(
+//   bookmarks: string[]
+// ): Promise<Property[] | undefined | null> {
+//   try {
+//     if (!apiDomain) return null;
+//     const response = (
+//       await Promise.all(
+//         bookmarks.map(async (id) => {
+//           const property = await fetchPropertyById(id);
+//           return property; // Return whatever value, including undefined
+//         })
+//       )
+//     ).filter((property) => property !== undefined) as Property[];
+//     return response;
+//   } catch (error) {
+//     console.error('Error fetching user favorites:', error);
+//   }
+// }
+
+export async function fetchUsersFavoriteProperties(
+  bookmarks: string[]
+): Promise<Property[] | undefined | null> {
+  try {
+    if (!apiDomain) return null;
+    const response = await axios.get(`${apiDomain}/properties/userFavorites`, {
+      params: {
+        ids: bookmarks.join(','),
+      },
+    });
+    const filteredResponse = response.data.filter(
+      (property: Property) => property !== undefined
+    ) as Property[];
+    return filteredResponse;
+  } catch (error) {
+    console.error('Error fetching user favorites:', error);
   }
 }

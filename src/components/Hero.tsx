@@ -1,7 +1,8 @@
 import React from 'react';
 import HeroSearchForm from './forms/hero-search-form';
+import { clerkClient, currentUser } from '@clerk/nextjs';
 
-export default function Hero() {
+export default async function Hero() {
   return (
     <section className='bg-blue-700 py-20 mb-4'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center'>

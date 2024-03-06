@@ -4,7 +4,6 @@ import PropertyCard from './PropertyCard';
 
 export default async function FeaturedProperties() {
   const featuredProperties = await fetchFeaturedProperties();
-  console.log(featuredProperties);
 
   if (!featuredProperties || featuredProperties.length === 0) return null;
 

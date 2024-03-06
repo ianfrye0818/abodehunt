@@ -1,13 +1,20 @@
 import { Property } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaBath, FaBed, FaMoneyBill, FaRuler } from 'react-icons/fa';
+import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
+import { Button } from './ui/button';
+import { currentUser } from '@clerk/nextjs';
+import { updateFavorites } from '@/actions/actions';
 
 type PropertCardProps = {
   property: Property;
 };
 
-export default function PropertyCard({ property }: PropertCardProps) {
+export default async function PropertyCard({ property }: PropertCardProps) {
+  const user = await currentUser();
+  const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
+
+  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id);
   return (
     <div className='rounded-xl shadow-md relative'>
       <Image
@@ -95,6 +102,17 @@ export default function PropertyCard({ property }: PropertCardProps) {
               Monthly
             </p>
           )}
+          {/* favorite button */}
+          <form action={updateFavorites}>
+            <input
+              type='hidden'
+              name='propertyId'
+              value={property._id}
+            />
+            <Button className='absolute hover:bg-gray-100 top-2 left-2 rounded-full p-2 bg-white w-8 h-8'>
+              <FaHeart className={isFavorite ? 'text-red-500' : 'text-gray-500'} />
+            </Button>
+          </form>
         </div>
 
         <div className='border border-gray-100 mb-5'></div>
