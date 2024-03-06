@@ -6,7 +6,7 @@ export default authMiddleware({
     '/sign-in',
     '/sign-up',
     '/properties',
-    '/properties/(.*)',
+    '/properties/((?!add))(.*)',
     '/api/(.*)',
     '/trpc/(.*)',
     '/_next/(.*)',
