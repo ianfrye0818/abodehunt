@@ -1,7 +1,6 @@
 import { Property } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { FaBath, FaBed, FaMoneyBill, FaRuler } from 'react-icons/fa';
 
 type PropertCardProps = {
@@ -12,10 +11,11 @@ export default function PropertyCard({ property }: PropertCardProps) {
   return (
     <div className='rounded-xl shadow-md relative'>
       <Image
-        src={'/images/properties/' + property.images[0]}
-        width={150}
-        height={100}
-        alt=''
+        src={`/images/properties/${property.images[0]}`}
+        width={0}
+        height={0}
+        sizes='100vw'
+        alt={property.name + ' image'}
         className='w-full h-auto rounded-t-xl'
       />
       <div className='p-4'>

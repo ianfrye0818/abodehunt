@@ -23,3 +23,14 @@ export async function fetchPropertyById(id: string): Promise<Property | undefine
     console.error('Error fetching property:', error);
   }
 }
+
+export async function fetchFeaturedProperties(): Promise<Property[] | undefined | null> {
+  try {
+    if (!apiDomain) return null;
+    const response = await axios.get(`${apiDomain}/properties/featured`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching featured properties:', error);
+  }
+}
