@@ -22,7 +22,6 @@ export default function ContactForm() {
 
   const onSubmit = async (data: contactFormInputs) => {
     const response = await handleContactFormSubmit(data);
-    console.log(response);
     reset();
   };
 

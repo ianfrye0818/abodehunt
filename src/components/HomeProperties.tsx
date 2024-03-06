@@ -4,8 +4,9 @@ import { Property } from '@/types';
 import PropertyCard from './PropertyCard';
 
 export default async function HomeProperties() {
-  const properties = (await fetchAllProperties()) as Property[];
+  const properties = await fetchAllProperties();
 
+  if (!properties || properties.length === 0) return null;
   const randomProperties = properties.sort(() => Math.random() - Math.random()).slice(0, 3);
 
   if (!randomProperties || randomProperties.length === 0)

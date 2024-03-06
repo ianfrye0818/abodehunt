@@ -2,6 +2,7 @@ import React from 'react';
 import '@/assets/styles/global.css';
 import Navbar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import { ClerkProvider } from '@clerk/nextjs';
 export const metadata = {
   title: 'AbodeHunt | Find the perfect rental',
   description:
@@ -10,12 +11,14 @@ export const metadata = {
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <body>
-        <Navbar />
-        <main className='min-h-screen'>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body>
+          <Navbar />
+          <main className='min-h-screen'>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

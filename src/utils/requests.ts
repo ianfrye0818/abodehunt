@@ -2,6 +2,7 @@ import { Property } from '@/types';
 import axios from 'axios';
 
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
+console.log(apiDomain);
 
 export async function fetchAllProperties(): Promise<Property[] | undefined | null> {
   try {

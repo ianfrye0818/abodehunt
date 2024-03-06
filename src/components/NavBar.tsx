@@ -7,16 +7,16 @@ import { FaGoogle } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLElement | null>(null);
   const profileMenuRef = useRef<HTMLElement | null>(null);
+  const { isSignedIn } = useUser();
 
   const pathname = usePathname();
-
-  const isLoggedIn = true;
 
   //useEffect to handle outside click and close the mobile and profile menu
   useEffect(() => {
@@ -124,20 +124,19 @@ export default function Navbar() {
           </div>
 
           {/* <!-- Right Side Menu (Logged Out) --> */}
-          {!isLoggedIn && (
+          {!isSignedIn && (
             <div className='hidden md:block md:ml-6'>
               <div className='flex items-center'>
-                <Button className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
-                  <FaGoogle className='mr-2 text-white' />
-                  <span>Login or Register</span>
-                </Button>
+                <div className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
+                  <SignInButton>Login</SignInButton>
+                </div>
               </div>
             </div>
           )}
 
           {/* <!-- Right Side Menu (Logged In) --> */}
-          {isLoggedIn && (
-            <div className='absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0'>
+          {isSignedIn && (
+            <div className='absolute inset-y-0 right-0 flex gap-5 items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0'>
               <Link
                 href='/messages'
                 className='relative group'
@@ -168,66 +167,7 @@ export default function Navbar() {
                 </span>
               </Link>
               {/* <!-- Profile dropdown button --> */}
-              <div className='relative ml-3'>
-                <div>
-                  <Button
-                    type='button'
-                    className='p-2 h-12 w-12 bg-transparent relative flex rounded-full hover:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                    id='user-menu-button'
-                    aria-expanded={isProfileMenuOpen}
-                    aria-haspopup={isProfileMenuOpen}
-                    onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  >
-                    <span className='absolute -inset-1.5'></span>
-                    <span className='sr-only'>Open user menu</span>
-                    <Image
-                      className='h-8 w-8 rounded-full'
-                      src={profileDefault}
-                      alt=''
-                    />
-                  </Button>
-                </div>
-
-                {/* <!-- Profile dropdown --> */}
-                <div
-                  id='user-menu'
-                  className={`${
-                    isProfileMenuOpen ? 'block' : 'hidden'
-                  } absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
-                role='menu`}
-                  aria-orientation='vertical'
-                  aria-labelledby='user-menu-button'
-                  tabIndex={-1}
-                  ref={profileMenuRef as LegacyRef<HTMLDivElement>}
-                >
-                  <Link
-                    href='/profile'
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                    role='menuitem'
-                    tabIndex={-1}
-                    id='user-menu-item-0'
-                  >
-                    Your Profile
-                  </Link>
-                  <Link
-                    href='/saved-properties'
-                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                    role='menuitem'
-                    tabIndex={-1}
-                    id='user-menu-item-2'
-                  >
-                    Saved Properties
-                  </Link>
-                  <Button
-                    className='block px-4 py-2 text-sm text-gray-700 bg-transparent w-full text-left hover:bg-gray-100'
-                    role='menuitem'
-                    tabIndex={-1}
-                    id='user-menu-item-2'
-                  >
-                    Sign Out
-                  </Button>
-                </div>
-              </div>
+              <UserButton />
             </div>
           )}
         </div>
@@ -264,7 +204,7 @@ export default function Navbar() {
           >
             Add Property
           </Link>
-          {!isLoggedIn && (
+          {!isSignedIn && (
             <Button className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4'>
               <i className='fa-brands fa-google mr-2'></i>
               <span className='flex text-white items-center gap-2'>
