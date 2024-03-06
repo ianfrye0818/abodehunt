@@ -1,25 +1,28 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 export default function Component() {
-  const router = useRouter();
-
   return (
-    <div className='flex flex-col min-h-[100dvh]'>
-      <header className='flex flex-col h-[calc(100vh_-_1rem)] items-center justify-center gap-2 px-4 text-center md:px-6'>
-        <div className='space-y-2'>
-          <h1 className='text-4xl font-bold tracking-tighter sm:text-6xl'>
-            404 Error - Page Not Found
-          </h1>
-          <p className='max-w-[600px] text-gray-500 md:text-xl/relaxed dark:text-gray-400'>
-            The page you are looking for might have been removed, had its name changed, or is
-            temporarily unavailable.
-          </p>
+    <section className='bg-blue-50 min-h-screen flex-grow'>
+      <div className='container m-auto max-w-2xl py-24'>
+        <div className='bg-white px-6 py-24 mb-4 shadow-md rounded-md border m-4 md:m-0'>
+          <div className='flex justify-center'>
+            <FaExclamationTriangle className='text-yellow-400 text-8xl' />
+          </div>
+          <div className='text-center'>
+            <h1 className='text-3xl font-bold mt-4 mb-2'>Page Not Found</h1>
+            <p className='text-gray-500 text-xl mb-10'>
+              The page you are looking for does not exist.
+            </p>
+            <Link
+              href='/'
+              className='bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded'
+            >
+              Go Home
+            </Link>
+          </div>
         </div>
-        <form className='flex max-w-sm flex-col gap-2 mx-auto'></form>
-        <Button onClick={() => router.back()}>Go Back</Button>
-      </header>
-    </div>
+      </div>
+    </section>
   );
 }
