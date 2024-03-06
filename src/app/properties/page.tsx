@@ -3,7 +3,7 @@ import { fetchAllProperties } from '@/utils/requests';
 
 export default async function PropertiesPage() {
   const properties = await fetchAllProperties();
-  if (!properties)
+  if (!properties || properties.length === 0)
     return (
       <div className='h-full w-full flex flex-col justify-center items-center text-3xl'>
         No Properties found

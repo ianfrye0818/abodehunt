@@ -8,7 +8,7 @@ export default async function HomeProperties() {
 
   const randomProperties = properties.sort(() => Math.random() - Math.random()).slice(0, 3);
 
-  if (!randomProperties)
+  if (!randomProperties || randomProperties.length === 0)
     return (
       <div className='h-full w-full flex flex-col justify-center items-center text-3xl'>
         No Properties found
