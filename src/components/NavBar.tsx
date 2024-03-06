@@ -173,7 +173,7 @@ export default function Navbar() {
                 </span>
               </Link>
               {/* <!-- Profile dropdown button --> */}
-              <UserButton />
+              <UserButton afterSignOutUrl='/' />
             </div>
           )}
         </div>
