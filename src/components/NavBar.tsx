@@ -190,7 +190,7 @@ export default function Navbar() {
             href='/'
             className={`${
               pathname === '/' && 'bg-gray-900'
-            } text-white block rounded-md px-3 py-2 text-base font-medium`}
+            } text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium`}
           >
             Home
           </Link>
@@ -210,8 +210,16 @@ export default function Navbar() {
           >
             Add Property
           </Link>
+          <Link
+            href='/favorites'
+            className={` ${
+              pathname === '/favorites' && 'bg-gray-900'
+            } text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium flex gap-2 items-center`}
+          >
+            Favorites <FaHeart className='text-red-600' />
+          </Link>
           {!isSignedIn && (
-            <div className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
+            <div className='flex text-center justify-center items-center max text-white bg-gray-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
               <SignInButton>Login</SignInButton>
             </div>
           )}
