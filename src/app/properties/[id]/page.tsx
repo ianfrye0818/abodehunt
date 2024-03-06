@@ -2,19 +2,14 @@ import { Link } from 'lucide-react';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
 
-import axios from 'axios';
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
-
-async function fetchProperty(id: string): Promise<Property | undefined | null> {
-  const property = await axios.get('http://localhost:3000/api/properties/' + id);
-  return property.data;
-}
+import { fetchPropertyById } from '@/utils/requests';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
 
-  const property = await fetchProperty(id);
+  const property = await fetchPropertyById(id);
 
   if (!property)
     return (

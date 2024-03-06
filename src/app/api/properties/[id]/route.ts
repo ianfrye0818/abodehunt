@@ -1,18 +1,16 @@
 import connectToDB from '@/db';
-import { NextRequest, NextResponse } from 'next/server';
 import Property from '@/models/Property';
+import { NextRequest } from 'next/server';
 
+//GET /api/properties/[id]
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
   try {
     await connectToDB();
-    const property = await Property.findById(id);
-    return NextResponse.json(property);
+    const property = await Property.findById(params.id);
+    if (!property) return new Response('Property not found', { status: 404 });
+    return new Response(JSON.stringify(property), { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error },
-      { status: 500, statusText: 'Something went wrong, please try again!' }
-    );
+    console.error('Error getting properties', error);
+    return new Response('Error getting properties', { status: 500 });
   }
 }

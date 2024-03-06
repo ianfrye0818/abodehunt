@@ -1,9 +1,10 @@
-import mongoose from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
-const PropertySchema = new mongoose.Schema(
+const PropertyShema = new Schema(
   {
     owner: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     name: {
@@ -16,24 +17,19 @@ const PropertySchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
     },
     location: {
       street: {
         type: String,
-        required: true,
       },
       city: {
         type: String,
-        required: true,
       },
       state: {
         type: String,
-        required: true,
       },
       zipcode: {
         type: String,
-        required: true,
       },
     },
     beds: {
@@ -48,50 +44,46 @@ const PropertySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    amenities: {
-      type: [String],
-      required: true,
-    },
+    amenities: [
+      {
+        type: String,
+      },
+    ],
     rates: {
       nightly: {
         type: Number,
-        required: false,
       },
       weekly: {
         type: Number,
-        required: false,
       },
       monthly: {
         type: Number,
-        required: false,
       },
     },
     seller_info: {
       name: {
         type: String,
-        required: true,
       },
       email: {
         type: String,
-        required: true,
       },
       phone: {
         type: String,
-        required: true,
       },
     },
-    images: {
-      type: [String],
-      required: true,
-    },
+    images: [
+      {
+        type: String,
+      },
+    ],
     is_featured: {
       type: Boolean,
-      required: true,
+      default: false,
     },
   },
+
   { timestamps: true }
 );
 
-const Property = mongoose.models.Property || mongoose.model('Property', PropertySchema);
-
+const Property = models.Property || model('Property', PropertyShema);
 export default Property;

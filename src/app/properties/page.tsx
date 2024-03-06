@@ -1,19 +1,23 @@
 import PropertyCard from '@/components/PropertyCard';
-import axios from 'axios';
-import { Property } from '@/types';
-
-async function fetchProperties(): Promise<Property[] | undefined | null> {
-  try {
-    const response = await axios.get('http://localhost:3000/api/properties');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching properties:', error);
-  }
-}
+import { fetchAllProperties } from '@/utils/requests';
 
 export default async function PropertiesPage() {
-  const properties = await fetchProperties();
-  if (!properties) return <div>No Properties found</div>;
+  const properties = await fetchAllProperties();
+  if (!properties)
+    return (
+      <div className='h-full w-full flex flex-col justify-center items-center text-3xl'>
+        No Properties found
+      </div>
+    );
+
+  //sort properties by date by ascending order
+  properties.sort((a, b) => {
+    if (a.createdAt && b.createdAt) {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
+    return 0;
+  });
+
   return (
     <section className='px-4 py-6'>
       <div className='container-xl lg:container m-auto px-4 py-6'>
