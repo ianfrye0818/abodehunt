@@ -22,7 +22,7 @@ export default async function Property({ params }: { params: { id: string } }) {
 
   return (
     <section className='bg-blue-50'>
-      <div className='container m-auto py-10 px-6'>
+      <div className='md:container m-auto md:py-10 md:px-6'>
         <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
           <main>
             <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left'>
@@ -138,7 +138,7 @@ export default async function Property({ params }: { params: { id: string } }) {
           </main>
 
           {/* <!-- Sidebar --> */}
-          <aside className='space-y-4'>
+          <aside className='space-y-4 px-4'>
             <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center gap-2'>
               <FaBookmark /> Bookmark Property
             </button>

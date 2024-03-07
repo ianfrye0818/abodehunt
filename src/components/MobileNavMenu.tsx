@@ -112,9 +112,11 @@ export default function MobileNavMenu() {
             </div>
           </SignedIn>
           <SignedOut>
-            <div className='flex text-center justify-center items-center max text-white bg-gray-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
-              <SignInButton>Login</SignInButton>
-            </div>
+            <SignInButton>
+              <div className='flex text-center justify-center items-center text-white bg-gray-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
+                Login
+              </div>
+            </SignInButton>
           </SignedOut>
         </div>
       </div>
