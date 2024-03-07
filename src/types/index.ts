@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { ZodString, z } from 'zod';
 
 export const PropertySchema = z.object({
   _id: z.string(),
@@ -32,6 +32,8 @@ export const PropertySchema = z.object({
   updatedAt: z.string(),
 });
 
+const PropertyFormSchema = PropertySchema.omit({ _id: true });
+
 export const contactFormDataSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email(),
@@ -42,4 +44,4 @@ export const contactFormDataSchema = z.object({
 
 export type Property = z.infer<typeof PropertySchema>;
 export type contactFormInputs = z.infer<typeof contactFormDataSchema>;
-export type propertyFormInputs = z.infer<typeof PropertySchema>;
+export type propertyFormInputs = z.infer<typeof PropertyFormSchema>;
