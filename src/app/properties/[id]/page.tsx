@@ -5,6 +5,8 @@ import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icon
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
 import { fetchPropertyById } from '@/utils/requests';
+import Image from 'next/image';
+import { ImageCarousel } from '@/components/imageCarousel';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -24,7 +26,12 @@ export default async function Property({ params }: { params: { id: string } }) {
         <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
           <main>
             <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left'>
-              <div className='text-gray-500 mb-4'>{property?.type}</div>
+              <div className='flex justify-center'>
+                <ImageCarousel images={property.images} />
+              </div>
+              <div className='text-white mb-4 bg-blue-700 max-w-fit p-2 text-center rounded-md'>
+                {property?.type}
+              </div>
               <h1 className='text-3xl font-bold mb-4'>{property.name}</h1>
               <div className='text-gray-500 mb-4 flex align-middle justify-center md:justify-start'>
                 <i className='fa-solid fa-location-dot text-lg text-orange-700 mr-2'></i>
