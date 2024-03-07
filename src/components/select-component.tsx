@@ -1,3 +1,4 @@
+'use client';
 import {
   Select,
   SelectContent,
@@ -7,18 +8,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useFormContext } from 'react-hook-form';
 
 type SelectComponentProps = {
   placeholder?: string;
   label: string;
   items: string[];
+  registerName: string;
 };
 
-export function SelectComponent({ placeholder, label, items }: SelectComponentProps) {
+export function SelectComponent({ placeholder, label, items, registerName }: SelectComponentProps) {
+  const methods = useFormContext();
+  const { register } = methods;
   return (
     <Select>
       <SelectTrigger className='w-full'>
-        <SelectValue placeholder={placeholder} />
+        <SelectValue
+          placeholder={placeholder}
+          {...register(registerName)}
+        />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

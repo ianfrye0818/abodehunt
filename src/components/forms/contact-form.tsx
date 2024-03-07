@@ -5,13 +5,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { handleContactFormSubmit } from '@/actions/actions';
 import { FaPaperPlane } from 'react-icons/fa';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contactFormDataSchema } from '@/lib/schema';
+import { contactFormDataSchema, contactFormInputs } from '@/types';
 
-type contactFormInputs = z.infer<typeof contactFormDataSchema>;
+type contactFormProps = {
+  propertyOwner: string;
+};
 
-export default function ContactForm() {
+export default function ContactForm({ propertyOwner }: contactFormProps) {
   const {
     handleSubmit,
     register,
@@ -89,6 +90,11 @@ export default function ContactForm() {
           {...register('message')}
         />
         {errors.message && <p className='text-red-500 text-sm my-2'>{errors.message.message}</p>}
+        <Input
+          type='hidden'
+          value={propertyOwner}
+          {...register('propertyOwnerId')}
+        />
       </div>
       <div>
         <button

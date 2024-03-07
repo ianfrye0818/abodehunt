@@ -1,11 +1,9 @@
 import { Link } from 'lucide-react';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
-
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
 import { fetchPropertyById } from '@/utils/requests';
-import Image from 'next/image';
 import { ImageCarousel } from '@/components/imageCarousel';
 
 export default async function Property({ params }: { params: { id: string } }) {
@@ -149,7 +147,7 @@ export default async function Property({ params }: { params: { id: string } }) {
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
-              <ContactForm />
+              <ContactForm propertyOwner={property.owner} />
             </div>
           </aside>
         </div>

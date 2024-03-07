@@ -1,31 +1,44 @@
-export type Property = {
-  _id: string;
-  owner: string;
-  name: string;
-  type: string;
-  description: string;
-  location: {
-    street: string;
-    city: string;
-    state: string;
-    zipcode: string;
-  };
-  beds: number;
-  baths: number;
-  square_feet: number;
-  amenities: string[];
-  rates: {
-    nightly?: number;
-    weekly?: number;
-    monthly?: number;
-  };
-  seller_info: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-  images: string[];
-  is_featured: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
+import { z } from 'zod';
+
+export const PropertySchema = z.object({
+  name: z.string(),
+  type: z.string(),
+  owner: z.string(),
+  description: z.string(),
+  location: z.object({
+    street: z.string().optional(),
+    city: z.string(),
+    state: z.string(),
+    zipcode: z.string(),
+  }),
+  beds: z.number(),
+  baths: z.number(),
+  square_feet: z.number(),
+  amenities: z.array(z.string()),
+  rates: z.object({
+    nightly: z.number().optional(),
+    weekly: z.number().optional(),
+    monthly: z.number().optional(),
+  }),
+  seller_info: z.object({
+    name: z.string(),
+    email: z.string(),
+    phone: z.string(),
+  }),
+  images: z.array(z.string()),
+  is_featured: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+export const contactFormDataSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  message: z.string().min(1, 'Message is required'),
+  propertyOwnerId: z.string(),
+});
+
+export type Property = z.infer<typeof PropertySchema>;
+export type contactFormInputs = z.infer<typeof contactFormDataSchema>;
+export type propertyFormInputs = z.infer<typeof PropertySchema>;

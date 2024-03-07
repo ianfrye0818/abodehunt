@@ -3,8 +3,7 @@ import { Schema, model, models } from 'mongoose';
 const PropertyShema = new Schema(
   {
     owner: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
       required: true,
     },
     name: {
