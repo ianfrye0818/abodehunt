@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const PropertySchema = z.object({
+  _id: z.string(),
   name: z.string(),
   type: z.string(),
   owner: z.string(),
