@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Schema } from 'mongoose';
 
 export const PropertySchema = z.object({
   _id: z.string(),
@@ -37,13 +38,21 @@ export const PropertySchema = z.object({
 
 const PropertyFormSchema = PropertySchema.omit({ _id: true, images: true });
 
-export const contactFormDataSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email(),
+const MessageSchema = z.object({
+  _id: z.instanceof(Schema.ObjectId),
+  name: z.string(),
+  email: z.string(),
   phone: z.string().optional(),
-  message: z.string().min(1, 'Message is required'),
+  message: z.string(),
   propertyOwnerId: z.string(),
+  propertyId: z.string(),
+  read: z.boolean().default(false),
+  propertyName: z.string(),
+  createdAt: z.string(),
 });
+
+export const contactFormDataSchema = MessageSchema.omit({ _id: true, createdAt: true });
+export type Message = z.infer<typeof MessageSchema>;
 
 export type Property = z.infer<typeof PropertySchema>;
 export type contactFormInputs = z.infer<typeof contactFormDataSchema>;

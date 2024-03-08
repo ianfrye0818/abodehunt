@@ -10,9 +10,11 @@ import { contactFormDataSchema, contactFormInputs } from '@/types';
 
 type contactFormProps = {
   propertyOwner: string;
+  propertyId: string;
+  propertyName: string;
 };
 
-export default function ContactForm({ propertyOwner }: contactFormProps) {
+export default function ContactForm({ propertyOwner, propertyId, propertyName }: contactFormProps) {
   const {
     handleSubmit,
     register,
@@ -22,7 +24,7 @@ export default function ContactForm({ propertyOwner }: contactFormProps) {
   } = useForm<contactFormInputs>({ resolver: zodResolver(contactFormDataSchema) });
 
   const onSubmit = async (data: contactFormInputs) => {
-    const response = await handleContactFormSubmit(data);
+    await handleContactFormSubmit(data);
     reset();
   };
 
@@ -94,6 +96,16 @@ export default function ContactForm({ propertyOwner }: contactFormProps) {
           type='hidden'
           value={propertyOwner}
           {...register('propertyOwnerId')}
+        />
+        <Input
+          type='hidden'
+          value={propertyId}
+          {...register('propertyId')}
+        />
+        <Input
+          type='hidden'
+          value={propertyName}
+          {...register('propertyName')}
         />
       </div>
       <div>

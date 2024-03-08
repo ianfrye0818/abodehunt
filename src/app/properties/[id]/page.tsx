@@ -147,7 +147,11 @@ export default async function Property({ params }: { params: { id: string } }) {
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
-              <ContactForm propertyOwner={property.owner} />
+              <ContactForm
+                propertyOwner={property.owner}
+                propertyId={property._id}
+                propertyName={property.name}
+              />
             </div>
           </aside>
         </div>
