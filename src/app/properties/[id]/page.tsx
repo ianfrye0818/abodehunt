@@ -25,7 +25,7 @@ export default async function Property({ params }: { params: { id: string } }) {
           <main>
             <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left'>
               <div className='flex justify-center'>
-                <ImageCarousel images={property.images} />
+                {property.images && <ImageCarousel images={property.images} />}
               </div>
               <div className='text-white mb-4 bg-blue-700 max-w-fit p-2 text-center rounded-md'>
                 {property?.type}
