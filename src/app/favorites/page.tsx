@@ -7,7 +7,6 @@ export default async function FavoritesPage() {
   const user = await currentUser();
   const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
   const properties = await fetchUsersFavoriteProperties(userBookmarks || []);
-  console.log(properties);
 
   if (!properties || properties.length === 0) return <div>No favorite properties found</div>;
   return (
