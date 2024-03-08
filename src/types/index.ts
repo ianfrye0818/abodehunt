@@ -29,7 +29,7 @@ export const PropertySchema = z.object({
     email: z.string(),
     phone: z.string(),
   }),
-  images: z.array(z.string()).optional(),
+  images: z.array(z.string()),
   is_featured: z.boolean(),
   createdAt: z.string(),
   updatedAt: z.string(),
