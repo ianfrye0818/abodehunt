@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     }
     return new NextResponse(JSON.stringify(messages), { status: 200 });
   } catch (error) {
-    console.error(error);
+    console.error(`[GET /api/messages] ${error}`);
     return new NextResponse(JSON.stringify('An error occurred'), { status: 500 });
   }
 }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const messagedb = await Message.create(newMessage.data);
     return new NextResponse(JSON.stringify(messagedb), { status: 201 });
   } catch (error) {
-    console.error(error);
+    console.error(`[POST /api/messages] ${error}`);
     return new NextResponse(JSON.stringify('An error occurred'), { status: 500 });
   }
 }
