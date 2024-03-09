@@ -5,6 +5,7 @@ import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { SignedIn, currentUser } from '@clerk/nextjs';
 import { updateFavorites } from '@/actions/actions';
+import FavoriteButton from '@/app/properties/components/favorite-button';
 
 type PropertCardProps = {
   property: Property;
@@ -104,16 +105,10 @@ export default async function PropertyCard({ property }: PropertCardProps) {
           )}
           {/* favorite button */}
           <SignedIn>
-            <form action={updateFavorites}>
-              <input
-                type='hidden'
-                name='propertyId'
-                value={property._id}
-              />
-              <Button className='absolute hover:bg-gray-100 top-2 left-2 rounded-full p-2 bg-white w-8 h-8'>
-                <FaHeart className={isFavorite ? 'text-red-500' : 'text-gray-500'} />
-              </Button>
-            </form>
+            <FavoriteButton
+              propertyId={property._id}
+              isFavorite={isFavorite ?? false}
+            />
           </SignedIn>
         </div>
 

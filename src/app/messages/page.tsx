@@ -9,16 +9,27 @@ import NoMessages from './no-message';
 //utility funcitons
 import { fetchMessages } from '@/utils/messageRequests';
 import { formatDate } from '@/utils/formatDate';
-
+import { SignInButton } from '@clerk/nextjs';
+import { Button } from '@/components/ui/button';
 export default async function Messages() {
+  //get current user
   const user = await currentUser();
-
-  if (!user) return <div>Please log in to view messages</div>;
-
+  //if no user is logged in return a message
+  if (!user)
+    return (
+      <div className='h-screen flex flex-col justify-center items-center text-3xl'>
+        Please log in to view messages{' '}
+        <Button asChild>
+          <SignInButton />
+        </Button>
+      </div>
+    );
+  //grab messages from the db
   const messages = await fetchMessages(user?.id as string);
-
+  //if no messages are found return a message
   if (!messages || messages.length === 0) return <NoMessages />;
 
+  //return the messages
   return (
     <div>
       <section className='bg-blue-50 h-screen'>
