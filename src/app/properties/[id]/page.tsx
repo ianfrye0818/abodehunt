@@ -3,8 +3,8 @@ import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
-import { fetchPropertyById } from '@/utils/requests';
 import { ImageCarousel } from '@/components/imageCarousel';
+import { fetchPropertyById } from '@/utils/propertyRequests';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;

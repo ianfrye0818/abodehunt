@@ -39,7 +39,7 @@ export const PropertySchema = z.object({
 export const PropertyFormSchema = PropertySchema.omit({ _id: true, images: true });
 
 export const MessageSchema = z.object({
-  _id: z.instanceof(Schema.ObjectId),
+  _id: z.string(),
   name: z.string(),
   email: z.string(),
   phone: z.string().optional(),

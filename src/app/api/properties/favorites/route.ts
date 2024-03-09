@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
-  const bookmarks = url.searchParams.get('ids')?.split(',');
+  const bookmarks = url.searchParams.get('bookmarks')?.split(',');
 
   try {
     await connectToDB();

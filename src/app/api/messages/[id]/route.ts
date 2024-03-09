@@ -1,5 +1,6 @@
 import connectToDB from '@/db';
 import Message from '@/models/Message';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 //GET /api/messages/[id]
@@ -21,7 +22,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   const body = await request.json();
   try {
     await connectToDB();
+
     const message = await Message.findByIdAndUpdate(id, body);
+    revalidatePath('/messages');
+
     return new NextResponse(JSON.stringify(message), { status: 200 });
   } catch (error) {
     console.error(error);

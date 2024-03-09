@@ -1,6 +1,6 @@
 import PropertyCard from '@/components/PropertyCard';
 import { Property } from '@/types';
-import { fetchUsersFavoriteProperties } from '@/utils/requests';
+import { fetchUsersFavoriteProperties } from '@/utils/propertyRequests';
 import { currentUser } from '@clerk/nextjs';
 
 export default async function FavoritesPage() {

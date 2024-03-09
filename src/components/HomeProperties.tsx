@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchAllProperties } from '@/utils/requests';
+import { fetchAllProperties } from '@/utils/propertyRequests';
 import { Property } from '@/types';
 import PropertyCard from './PropertyCard';
 

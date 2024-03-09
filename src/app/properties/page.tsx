@@ -1,5 +1,6 @@
 import PropertyCard from '@/components/PropertyCard';
-import { fetchAllProperties } from '@/utils/requests';
+import { Property } from '@/types';
+import { fetchAllProperties } from '@/utils/propertyRequests';
 
 export default async function PropertiesPage() {
   const properties = await fetchAllProperties();

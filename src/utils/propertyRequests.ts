@@ -35,33 +35,14 @@ export async function fetchFeaturedProperties(): Promise<Property[] | undefined 
   }
 }
 
-// export async function fetchUsersFavoriteProperties(
-//   bookmarks: string[]
-// ): Promise<Property[] | undefined | null> {
-//   try {
-//     if (!apiDomain) return null;
-//     const response = (
-//       await Promise.all(
-//         bookmarks.map(async (id) => {
-//           const property = await fetchPropertyById(id);
-//           return property; // Return whatever value, including undefined
-//         })
-//       )
-//     ).filter((property) => property !== undefined) as Property[];
-//     return response;
-//   } catch (error) {
-//     console.error('Error fetching user favorites:', error);
-//   }
-// }
-
 export async function fetchUsersFavoriteProperties(
   bookmarks: string[]
 ): Promise<Property[] | undefined | null> {
   try {
     if (!apiDomain) return null;
-    const response = await axios.get(`${apiDomain}/properties/userFavorites`, {
+    const response = await axios.get(`${apiDomain}/properties/favorites`, {
       params: {
-        ids: bookmarks.join(','),
+        bookmarks: bookmarks.join(','),
       },
     });
     const filteredResponse = response.data.filter(

@@ -1,7 +1,8 @@
 import { Property } from '@/types';
-import { fetchFeaturedProperties } from '@/utils/requests';
 import PropertyCard from './PropertyCard';
+import { fetchFeaturedProperties } from '@/utils/propertyRequests';
 
+//FeaturedProperties component
 export default async function FeaturedProperties() {
   const featuredProperties = await fetchFeaturedProperties();
 
