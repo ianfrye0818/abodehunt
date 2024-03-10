@@ -4,6 +4,7 @@ import Navbar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { ClerkProvider } from '@clerk/nextjs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata = {
   title: 'AbodeHunt | Find the perfect rental',
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body>
           <Navbar />
           <main className='min-h-screen'>{children}</main>
+          <Toaster />
           <Footer />
         </body>
       </html>
