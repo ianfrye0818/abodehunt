@@ -5,7 +5,6 @@ const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 
 async function fetchMessages(userId: string): Promise<Message[] | undefined> {
   const response = await axios.get(`${apiDomain}/messages?userId=${userId}`);
-  console.log('info', response.data);
   return response.data as Message[] | undefined;
 }
 

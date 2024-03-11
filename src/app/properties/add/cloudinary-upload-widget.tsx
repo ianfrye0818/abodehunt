@@ -10,7 +10,7 @@ export default function CloudinaryUploadWidget({ setImageIds }: CloudinaryUpload
     <CldUploadButton
       uploadPreset='aptjvwkn'
       onSuccess={(results) => {
-        const imageUploadPublicId = (results.info as CloudinaryUploadWidgetInfo).public_id;
+        const imageUploadPublicId = (results.info as CloudinaryUploadWidgetInfo).url;
         if (!imageUploadPublicId) throw new Error('No public_id');
         setImageIds((prev) => [...prev, imageUploadPublicId]);
       }}

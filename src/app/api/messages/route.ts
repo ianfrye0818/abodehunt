@@ -24,7 +24,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  console.log(body);
   const newMessage = contactFormDataSchema.safeParse(body);
   if (!newMessage.success) {
     return new NextResponse(JSON.stringify('Invalid data'), { status: 400 });

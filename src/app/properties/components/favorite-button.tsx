@@ -1,5 +1,5 @@
 'use client';
-import { updateFavorites } from '@/actions/actions';
+import { updateFavorites } from '@/actions/propertyActions';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import { FaHeart } from 'react-icons/fa';

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { SignedIn, currentUser } from '@clerk/nextjs';
-import { updateFavorites } from '@/actions/actions';
+import { updateFavorites } from '@/actions/propertyActions';
 import FavoriteButton from '@/app/properties/components/favorite-button';
 
 type PropertCardProps = {

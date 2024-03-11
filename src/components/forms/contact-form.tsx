@@ -2,7 +2,7 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { handleContactFormSubmit } from '@/actions/actions';
+import { handleContactFormSubmit } from '@/actions/propertyActions';
 import { FaPaperPlane } from 'react-icons/fa';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

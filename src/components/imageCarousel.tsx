@@ -9,7 +9,6 @@ import {
 import Image from 'next/image';
 
 export function ImageCarousel({ images }: { images: string[] }) {
-  console.log(images);
   return (
     <Carousel className='w-full max-w-[500px]'>
       <CarouselContent>

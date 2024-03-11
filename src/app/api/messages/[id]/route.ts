@@ -20,7 +20,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   const { id } = params;
   const body = await request.json();
-  console.log('info', id, body);
   try {
     await connectToDB();
 
