@@ -36,7 +36,7 @@ export const PropertySchema = z.object({
   updatedAt: z.string(),
 });
 
-export const PropertyFormSchema = PropertySchema.omit({ _id: true, images: true });
+export const PropertyFormSchema = PropertySchema.omit({ _id: true });
 
 export const MessageSchema = z.object({
   _id: z.string(),

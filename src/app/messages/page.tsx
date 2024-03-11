@@ -33,8 +33,8 @@ export default async function Messages() {
 
   //return the messages
   return (
-    <div className='bg-white min-h-screen'>
-      <section className='md:bg-blue-50 min-h-screen'>
+    <div className='bg-white h-full'>
+      <section className='md:bg-blue-50 h-full'>
         <div className='md:container m-auto md:py-24 max-w-6xl'>
           <div className='bg-white px-6 py-8 mb-4 md:shadow-md rounded-md md:border md:m-0 flex flex-col gap-5 h-full'>
             <h1 className='text-3xl font-bold mb-4'>Your Messages</h1>
