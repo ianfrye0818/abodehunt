@@ -1,3 +1,4 @@
+import { CloudinaryImageComponent } from '@/app/properties/add/cloudinary-upload-widget';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
@@ -6,22 +7,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import Image from 'next/image';
 
 export function ImageCarousel({ images }: { images: string[] }) {
-  console.log(images);
   return (
-    <Carousel className='w-full max-w-[500px]'>
+    <Carousel className='w-full max-w-[480px]'>
       <CarouselContent>
         {images.map((image, index) => (
           <CarouselItem key={index}>
             <div className='p-1'>
               <Card>
                 <CardContent className='flex aspect-square items-center justify-center p-6 relative'>
-                  <Image
-                    src={'/images/properties/' + image}
-                    alt='property image'
-                    fill
+                  <CloudinaryImageComponent
+                    image={image}
+                    alt='Property Image'
                   />
                 </CardContent>
               </Card>

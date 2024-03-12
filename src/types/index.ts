@@ -4,8 +4,8 @@ import { Schema } from 'mongoose';
 export const PropertySchema = z.object({
   _id: z.string(),
   name: z.string(),
-  type: z.string(),
-  owner: z.string(),
+  type: z.string().min(1, 'Property type is required'),
+  owner: z.any(),
   description: z.string().optional(),
   location: z.object({
     street: z.string().optional(),
@@ -19,7 +19,7 @@ export const PropertySchema = z.object({
   beds: z.coerce.number(),
   baths: z.coerce.number(),
   square_feet: z.coerce.number(),
-  amenities: z.array(z.string()).min(1),
+  amenities: z.any(),
   rates: z.object({
     nightly: z.coerce.number().optional(),
     weekly: z.coerce.number().optional(),
@@ -30,13 +30,17 @@ export const PropertySchema = z.object({
     email: z.string(),
     phone: z.string(),
   }),
-  images: z.array(z.string()),
-  is_featured: z.boolean(),
+  images: z.any(),
+  is_featured: z.boolean().default(false),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
 
-export const PropertyFormSchema = PropertySchema.omit({ _id: true, images: true });
+export const PropertyFormSchema = PropertySchema.omit({
+  _id: true,
+  createdAt: true,
+  updatedAt: true,
+});
 
 export const MessageSchema = z.object({
   _id: z.string(),

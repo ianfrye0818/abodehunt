@@ -18,9 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       {/* <QueryClientProvider client={queryClient}> */}
       <html lang='en'>
-        <body>
+        <body className='min-h-screen grid  grid-rows-[auto,1fr,auto] '>
           <Navbar />
-          <main className='min-h-screen'>{children}</main>
+          <main>{children}</main>
           <Toaster />
           <Footer />
         </body>

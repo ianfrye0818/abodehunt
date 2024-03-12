@@ -1,6 +1,6 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose from 'mongoose';
 
-const PropertyShema = new Schema(
+const PropertyShema = new mongoose.Schema(
   {
     owner: {
       type: String,
@@ -83,6 +83,5 @@ const PropertyShema = new Schema(
 
   { timestamps: true }
 );
-
-const Property = models.Property || model('Property', PropertyShema);
+const Property = mongoose.models.Property || mongoose.model('Property', PropertyShema);
 export default Property;

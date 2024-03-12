@@ -1,8 +1,15 @@
 'use server';
 import { currentUser, clerkClient } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
-import { contactFormDataSchema, contactFormInputs, propertyFormInputs } from '@/types';
+import {
+  PropertyFormSchema,
+  contactFormDataSchema,
+  contactFormInputs,
+  propertyFormInputs,
+} from '@/types';
 import Message from '@/models/Message';
+import Property from '@/models/Property';
+import connectToDB from '@/db';
 
 export async function handleContactFormSubmit(formdata: contactFormInputs) {
   //check that the messages are valid
@@ -33,34 +40,21 @@ export const updateFavorites = async (propertyId: string) => {
     await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: newBookmarks } });
     revalidatePath('/properties');
   }
-
-  // const propertyId = formData.get('propertyId');
-  // if (!propertyId) throw new Error('Property ID not found');
-  // const user = await currentUser();
-  // if (!user) throw new Error('User not found');
-  // const bookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
-  // const isFavorite = user && bookmarks && bookmarks.includes(propertyId as string);
-
-  // if (isFavorite) {
-  //   const newBookmarks = bookmarks?.filter((bookmark) => bookmark !== propertyId);
-  //   await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: newBookmarks } });
-  //   revalidatePath('/properties');
-  // } else {
-  //   const newBookmarks = bookmarks ? [...bookmarks, propertyId] : [propertyId];
-  //   await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: newBookmarks } });
-  //   revalidatePath('/properties');
-  // }
 };
 
 export async function addProperty(formData: propertyFormInputs) {
-  const result = contactFormDataSchema.safeParse(formData);
   try {
-    if (result.success) {
-      console.log(result.data);
-    } else {
+    const result = PropertyFormSchema.safeParse(formData);
+    if (!result.success) {
       console.log(result.error.errors);
+      return null;
     }
+    await connectToDB();
+    const propertyResult = await Property.create(result.data);
+    console.log('[add property result]', propertyResult);
+    return { message: { success: 'Property added successfully!' } };
   } catch (error) {
-    console.log(error);
+    console.log('[add property error]', error);
+    return { message: { error: 'Error adding property' } };
   }
 }

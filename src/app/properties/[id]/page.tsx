@@ -17,7 +17,6 @@ export default async function Property({ params }: { params: { id: string } }) {
         Error getting property <Link href='/'>Go back</Link>
       </div>
     );
-
   return (
     <section className='bg-blue-50'>
       <div className='md:container m-auto md:py-10 md:px-6'>
@@ -118,7 +117,7 @@ export default async function Property({ params }: { params: { id: string } }) {
               <h3 className='text-lg font-bold mb-6'>Amenities</h3>
 
               <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 list-none'>
-                {property.amenities.map((amenity) => (
+                {property.amenities.map((amenity: string) => (
                   <li
                     key={amenity}
                     className='mb-2'
