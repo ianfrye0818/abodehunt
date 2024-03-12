@@ -1,12 +1,14 @@
-import { Property } from '@/types';
-import Image from 'next/image';
+//library imports
 import Link from 'next/link';
-import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
-import { Button } from './ui/button';
 import { SignedIn, currentUser } from '@clerk/nextjs';
-import { updateFavorites } from '@/actions/propertyActions';
-import FavoriteButton from '@/app/properties/components/favorite-button';
 
+//component import
+import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
+import FavoriteButton from '@/app/properties/components/favorite-button';
+import { CloudinaryImageComponent } from '@/app/properties/add/cloudinary-upload-widget';
+
+//type imports
+import { Property } from '@/types';
 type PropertCardProps = {
   property: Property;
 };
@@ -18,13 +20,9 @@ export default async function PropertyCard({ property }: PropertCardProps) {
   const isFavorite = user && userBookmarks && userBookmarks.includes(property._id);
   return (
     <div className='rounded-xl shadow-md relative'>
-      <Image
-        src={`/images/properties/${property.images[0]}`}
-        width={0}
-        height={0}
-        sizes='100vw'
-        alt={property.name + ' image'}
-        className='w-full h-auto rounded-t-xl'
+      <CloudinaryImageComponent
+        image={property.images[0]}
+        alt={`${property.images[0]} image`}
       />
       <div className='p-4'>
         <div className='text-left md:text-center lg:text-left mb-6'>
