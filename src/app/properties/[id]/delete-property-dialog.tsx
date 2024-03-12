@@ -24,6 +24,7 @@ export default function DeletePropertyDialog({ propertyId }: { propertyId: strin
   const handleDelete = async () => {
     setIsSubmitting(true);
     const deleted = await deleteProperty(propertyId);
+
     if (deleted.message.success) {
       router.push('/properties');
       toast({

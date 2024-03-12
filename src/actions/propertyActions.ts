@@ -3,7 +3,9 @@ import { currentUser, clerkClient } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 import { PropertyFormSchema, propertyFormInputs } from '@/types';
 import Property from '@/models/Property';
+import type { Property as PropertyType } from '@/types';
 import connectToDB from '@/db';
+import { deleteImages } from '@/utils/cloudinary';
 
 //updatese clerks user DB to include the property id of the favorite in their bookmarks
 export const updateFavorites = async (propertyId: string) => {
@@ -56,7 +58,11 @@ export async function addProperty(formData: propertyFormInputs) {
 export async function deleteProperty(id: string) {
   try {
     await connectToDB();
-    const deleted = await Property.findByIdAndDelete(id);
+    const property = (await Property.findOne({ _id: id })) as PropertyType;
+    if (!property) throw new Error('Property not found');
+    const isImgDeleted = await deleteImages(property.images);
+    if (isImgDeleted.message.error) throw new Error('Error deleting images');
+    const deleted = await Property.deleteOne({ _id: id });
     if (!deleted) throw new Error('Error deleting property');
     return { message: { success: 'Property Deleted Successfully' } };
   } catch (error) {
