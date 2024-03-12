@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { CldImage, CldUploadButton, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 
 type CloudinaryUploadWidgetProps = {
@@ -7,14 +8,17 @@ type CloudinaryUploadWidgetProps = {
 
 export default function CloudinaryUploadWidget({ setImageIds }: CloudinaryUploadWidgetProps) {
   return (
-    <CldUploadButton
-      uploadPreset='aptjvwkn'
-      onSuccess={(results) => {
-        const imageUploadPublicId = (results.info as CloudinaryUploadWidgetInfo).public_id;
-        if (!imageUploadPublicId) throw new Error('No public_id');
-        setImageIds((prev) => [...prev, imageUploadPublicId]);
-      }}
-    />
+    <Button asChild>
+      <CldUploadButton
+        options={{ maxFiles: 4, maxImageFileSize: 10000000, sources: ['local', 'unsplash', 'url'] }}
+        uploadPreset='aptjvwkn'
+        onSuccess={(results) => {
+          const imageUploadPublicId = (results.info as CloudinaryUploadWidgetInfo).public_id;
+          if (!imageUploadPublicId) throw new Error('No public_id');
+          setImageIds((prev) => [...prev, imageUploadPublicId]);
+        }}
+      />
+    </Button>
   );
 }
 
