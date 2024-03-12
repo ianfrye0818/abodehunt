@@ -42,7 +42,7 @@ export async function createMessage(formdata: contactFormInputs) {
       if (!message) throw new Error('Error creating message');
       return { message: { success: 'Message sent successfully!' } };
     } else {
-      console.log(result.error.errors);
+      console.error(result.error.errors);
       throw new Error('Invalid form data');
     }
   } catch (error) {

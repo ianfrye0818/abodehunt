@@ -16,7 +16,6 @@ export default function DeleteMesageButton({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { decrementUnreadCount, messages } = useMessages();
-  console.log(messages);
   async function handleDelete() {
     try {
       setIsSubmitting(true);

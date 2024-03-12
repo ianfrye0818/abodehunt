@@ -48,7 +48,7 @@ export default function AddPropertyForm() {
       reset();
       router.push('/properties');
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({
         description: (error as Error).message,
         variant: 'error',

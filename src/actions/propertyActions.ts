@@ -38,15 +38,15 @@ export async function addProperty(formData: propertyFormInputs) {
   try {
     const result = PropertyFormSchema.safeParse(formData);
     if (!result.success) {
-      console.log(result.error.errors);
+      console.error(result.error.errors);
       return null;
     }
     await connectToDB();
     const propertyResult = await Property.create(result.data);
-    console.log('[add property result]', propertyResult);
+    console.error('[add property result]', propertyResult);
     return { message: { success: 'Property added successfully!' } };
   } catch (error) {
-    console.log('[add property error]', error);
+    console.error('[add property error]', error);
     return { message: { error: 'Error adding property' } };
   } finally {
     revalidatePath('/properties');
@@ -75,6 +75,18 @@ export async function fetchAllProperties() {
     return properties;
   } catch (error) {
     console.error('Error fetching properties:', error);
+    return null;
+  }
+}
+
+export async function fetchUserProperties(userId: string) {
+  try {
+    await connectToDB();
+    const properties = await Property.find({ owner: userId });
+    if (!properties) return [];
+    return properties;
+  } catch (error) {
+    console.error('[fetchUserProperties error]', error);
     return null;
   }
 }

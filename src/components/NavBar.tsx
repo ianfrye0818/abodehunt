@@ -6,9 +6,10 @@ import { FaHeart } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
+import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import MenuDrawer from './MenuDrawer';
 import { useMessages } from '@/context/messageContext';
+import { UserButton } from './userButton';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -178,7 +179,7 @@ export default function Navbar() {
               </div>
 
               {/* <!-- Profile dropdown button --> */}
-              <UserButton afterSignOutUrl='/' />
+              <UserButton />
             </div>
           </SignedIn>
         </div>

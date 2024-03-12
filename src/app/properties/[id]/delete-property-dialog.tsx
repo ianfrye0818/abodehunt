@@ -46,7 +46,7 @@ export default function DeletePropertyDialog({ propertyId }: { propertyId: strin
       <AlertDialog>
         <AlertDialogTrigger
           disabled={isSubmitting}
-          className='bg-red-600 hover:bg-red-700 text-white hover:text-white p-2 rounded-lg'
+          className='bg-red-600 hover:bg-red-700 text-white hover:text-white p-2 rounded-lg w-full text-center flex items-center gap-2 justify-center'
         >
           <div className='flex gap-2 items-center'>
             <FaTrashCan /> Delete Propety
