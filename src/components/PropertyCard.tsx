@@ -16,8 +16,7 @@ type PropertCardProps = {
 export default async function PropertyCard({ property }: PropertCardProps) {
   const user = await currentUser();
   const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
-
-  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id);
+  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id.toString());
   return (
     <div className='rounded-xl shadow-md relative'>
       <CloudinaryImageComponent
@@ -104,7 +103,7 @@ export default async function PropertyCard({ property }: PropertCardProps) {
           {/* favorite button */}
           <SignedIn>
             <FavoriteButton
-              propertyId={property._id}
+              propertyId={property._id.toString()}
               isFavorite={isFavorite ?? false}
             />
           </SignedIn>

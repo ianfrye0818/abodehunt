@@ -1,6 +1,5 @@
 import React from 'react';
 import HeroSearchForm from './forms/hero-search-form';
-import { clerkClient, currentUser } from '@clerk/nextjs';
 
 export default async function Hero() {
   return (

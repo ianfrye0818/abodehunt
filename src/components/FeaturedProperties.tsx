@@ -1,6 +1,6 @@
 import { Property } from '@/types';
 import PropertyCard from './PropertyCard';
-import { fetchFeaturedProperties } from '@/utils/propertyRequests';
+import { fetchFeaturedProperties } from '@/actions/propertyActions';
 
 //FeaturedProperties component
 export default async function FeaturedProperties() {

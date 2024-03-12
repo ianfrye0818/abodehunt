@@ -1,7 +1,7 @@
 import React from 'react';
-import { fetchAllProperties } from '@/utils/propertyRequests';
 import { Property } from '@/types';
 import PropertyCard from './PropertyCard';
+import { fetchAllProperties } from '@/actions/propertyActions';
 
 export default async function HomeProperties() {
   const properties = await fetchAllProperties();

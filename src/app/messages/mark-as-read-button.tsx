@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import { updateMessage } from './messageActions';
 import { useToast } from '@/components/ui/use-toast';
+import { useMessages } from '@/context/messageContext';
 
 export default function MarkAsReadButton({
   messageId,
@@ -13,6 +14,7 @@ export default function MarkAsReadButton({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { incrementUnreadCount, decrementUnreadCount } = useMessages();
 
   async function handleUpdateMessage() {
     try {
@@ -20,11 +22,18 @@ export default function MarkAsReadButton({
       const updated = await updateMessage(messageId, read);
       if (!updated || updated.message.error)
         throw new Error(updated.message.error ?? 'Error updating message');
+
       toast({
         description: updated.message.success as string,
         variant: 'success',
         duration: 3000,
       });
+
+      if (read) {
+        incrementUnreadCount();
+      } else {
+        decrementUnreadCount();
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast({

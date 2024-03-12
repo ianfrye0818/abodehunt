@@ -4,11 +4,19 @@ import { Button } from '@/components/ui/button';
 import { deleteMessage } from './messageActions';
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
+import { useMessages } from '@/context/messageContext';
 
-export default function DeleteMesageButton({ messageId }: { messageId: string }) {
+export default function DeleteMesageButton({
+  messageId,
+  read,
+}: {
+  messageId: string;
+  read: boolean;
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
+  const { decrementUnreadCount, messages } = useMessages();
+  console.log(messages);
   async function handleDelete() {
     try {
       setIsSubmitting(true);
@@ -19,6 +27,7 @@ export default function DeleteMesageButton({ messageId }: { messageId: string })
           variant: 'success',
           duration: 3000,
         });
+        if (!read) decrementUnreadCount();
       } else throw new Error('Error deleting message');
     } catch (error) {
       if (error instanceof Error) {

@@ -48,10 +48,13 @@ export default function MessageCard({ message }: { message: Message }) {
           <p className='text-gray-700 py-10'>{message.message}</p>
         </div>
         <MarkAsReadButton
-          messageId={message._id}
+          messageId={message._id.toString()}
           read={message.read}
         />
-        <DeleteMesageButton messageId={message._id} />
+        <DeleteMesageButton
+          read={message.read}
+          messageId={message._id.toString()}
+        />
       </div>
     </div>
   );

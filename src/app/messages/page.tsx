@@ -2,16 +2,13 @@
 import { currentUser } from '@clerk/nextjs';
 
 //component import
-import DeleteMesageButton from './delete-message-button';
-import MarkAsReadButton from './mark-as-read-button';
 import NoMessages from './no-message';
 import { SignInButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 
 //utility funcitons
-import { fetchMessages } from '@/utils/messageRequests';
-import { formatDate } from '@/utils/formatDate';
 import MessageCard from './message-card';
+import { fetchMessages } from './messageActions';
 
 export default async function Messages() {
   //get current user

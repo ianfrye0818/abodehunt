@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache';
 import { PropertyFormSchema, propertyFormInputs } from '@/types';
 import Property from '@/models/Property';
 import connectToDB from '@/db';
-import { User } from '@clerk/nextjs/server';
 
 //updatese clerks user DB to include the property id of the favorite in their bookmarks
 export const updateFavorites = async (propertyId: string) => {
@@ -13,13 +12,21 @@ export const updateFavorites = async (propertyId: string) => {
     const user = await currentUser();
     if (!user) throw new Error('User not found');
     //get the users bookmarks if they exist
-    const bookmarks = user.publicMetadata?.bookmarks as string[] | undefined;
-
-    if (bookmarks && bookmarks.includes(propertyId)) {
-      removeFavorite(propertyId, user, bookmarks);
-    } else {
-      addFavorite(propertyId, user, bookmarks);
+    const bookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
+    //if the user has no bookmarks, create an array and add the propertyId
+    if (!bookmarks)
+      await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: [propertyId] } });
+    //remove the propertyId from the array if it exists
+    if (bookmarks?.includes(propertyId)) {
+      const newBookmarks = bookmarks?.filter((bookmark) => bookmark !== propertyId);
+      await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: newBookmarks } });
     }
+    //if the propertyId is not in the array, add it
+    else {
+      const newBookmarks = bookmarks ? [...bookmarks, propertyId] : [propertyId];
+      await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: newBookmarks } });
+    }
+    return { message: { success: 'Favorites updated successfully' } };
   } catch (error) {
     console.error(['updateFavorites', error]);
     return { message: { error: 'Error updating favorites' } };
@@ -27,26 +34,6 @@ export const updateFavorites = async (propertyId: string) => {
     revalidatePath('/favorites');
   }
 };
-
-async function addFavorite(propertyId: string, user: User, bookmarks: string[] | undefined) {
-  if (!bookmarks) {
-    await clerkClient.users.updateUser(user.id, { publicMetadata: { bookmarks: [propertyId] } });
-  } else {
-    await clerkClient.users.updateUser(user.id, {
-      publicMetadata: { bookmarks: [...bookmarks, propertyId] },
-    });
-  }
-  return { message: { success: 'Property added to favorites' } };
-}
-
-async function removeFavorite(propertyId: string, user: User, bookmarks: string[]) {
-  const updatedBookmarks = bookmarks.filter((id) => id !== propertyId);
-  await clerkClient.users.updateUser(user.id, {
-    publicMetadata: { bookmarks: updatedBookmarks },
-  });
-  return { message: { success: 'Property removed from favorites' } };
-}
-
 export async function addProperty(formData: propertyFormInputs) {
   try {
     const result = PropertyFormSchema.safeParse(formData);
@@ -61,6 +48,8 @@ export async function addProperty(formData: propertyFormInputs) {
   } catch (error) {
     console.log('[add property error]', error);
     return { message: { error: 'Error adding property' } };
+  } finally {
+    revalidatePath('/properties');
   }
 }
 
@@ -75,5 +64,54 @@ export async function deleteProperty(id: string) {
     return { message: { error: 'Error deleting property' } };
   } finally {
     revalidatePath('/properties');
+  }
+}
+
+export async function fetchAllProperties() {
+  try {
+    await connectToDB();
+    const properties = await Property.find();
+    if (!properties) return [];
+    return properties;
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    return null;
+  }
+}
+
+export async function fetchPropertyById(id: string) {
+  try {
+    await connectToDB();
+    const property = await Property.findById(id);
+    if (!property) [];
+    return property;
+  } catch (error) {
+    console.error('Error fetching property:', error);
+    return null;
+  }
+}
+
+export async function fetchFeaturedProperties() {
+  try {
+    await connectToDB();
+    const properties = await Property.find({ is_featured: true });
+    if (!properties) return [];
+    return properties;
+  } catch (error) {
+    console.error('Error fetching featured properties:', error);
+    return null;
+  }
+}
+
+export async function fetchUsersFavoriteProperties(bookmarks: string[]) {
+  if (bookmarks.length === 0) return [];
+  try {
+    await connectToDB();
+    const properties = await Property.find({ _id: { $in: bookmarks } });
+    if (!properties) return [];
+    return properties;
+  } catch (error) {
+    console.error('[fetching Properties error]', error);
+    return null;
   }
 }

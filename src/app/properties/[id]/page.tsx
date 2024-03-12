@@ -1,13 +1,16 @@
-import { Link } from 'lucide-react';
+import Link from 'next/link';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
 import type { Property } from '@/types';
 import ContactForm from '@/components/forms/contact-form';
 import { ImageCarousel } from '@/components/imageCarousel';
-import { fetchPropertyById } from '@/utils/propertyRequests';
+import { currentUser } from '@clerk/nextjs';
+import DeletePropertyDialog from './delete-property-dialog';
+import { fetchPropertyById } from '@/actions/propertyActions';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
+  const user = await currentUser();
 
   const property = await fetchPropertyById(id);
 
@@ -22,7 +25,12 @@ export default async function Property({ params }: { params: { id: string } }) {
       <div className='md:container m-auto md:py-10 md:px-6'>
         <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
           <main>
-            <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left'>
+            <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left relative'>
+              {property.owner === user?.id && (
+                <div className='absolute top-3 right-3'>
+                  <DeletePropertyDialog propertyId={property._id.toString()} />
+                </div>
+              )}
               <div className='flex justify-center'>
                 <ImageCarousel images={property.images} />
               </div>
@@ -148,7 +156,7 @@ export default async function Property({ params }: { params: { id: string } }) {
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
               <ContactForm
                 propertyOwner={property.owner}
-                propertyId={property._id}
+                propertyId={property._id.toString()}
                 propertyName={property.name}
               />
             </div>

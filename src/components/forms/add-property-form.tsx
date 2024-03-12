@@ -18,7 +18,7 @@ import CloudinaryUploadWidget from '@/app/properties/add/cloudinary-upload-widge
 import { addProperty } from '@/actions/propertyActions';
 
 //type import
-import { PropertyFormSchema, PropertySchema, propertyFormInputs } from '@/types';
+import { PropertyFormSchema, propertyFormInputs } from '@/types';
 
 export default function AddPropertyForm() {
   const router = useRouter();
@@ -42,6 +42,7 @@ export default function AddPropertyForm() {
       if (property?.message.success) {
         toast({
           description: property.message.success,
+          variant: 'success',
         });
       } else throw new Error(property?.message.error as string);
       reset();
@@ -50,7 +51,7 @@ export default function AddPropertyForm() {
       console.log(error);
       toast({
         description: (error as Error).message,
-        variant: 'destructive',
+        variant: 'error',
       });
     }
   }

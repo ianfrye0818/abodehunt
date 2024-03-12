@@ -52,3 +52,27 @@ export async function createMessage(formdata: contactFormInputs) {
     revalidatePath('/messages');
   }
 }
+
+export async function fetchMessages(userId: string) {
+  try {
+    await connectToDB();
+    const messages = await Message.find({ owner: userId });
+    if (!messages) return [];
+    return messages;
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    return null;
+  }
+}
+
+export async function fetchNumberOfUnreadMessages(userId: string) {
+  try {
+    await connectToDB();
+    const messages = await Message.find({ owner: userId, read: false });
+    if (!messages) return 0;
+    return messages.length;
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    return 0;
+  }
+}

@@ -6,15 +6,16 @@ import { FaHeart } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs';
 import MenuDrawer from './MenuDrawer';
+import { useMessages } from '@/context/messageContext';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLElement | null>(null);
   const profileMenuRef = useRef<HTMLElement | null>(null);
-
+  const { messages } = useMessages();
   const pathname = usePathname();
 
   //useEffect to handle outside click and close the mobile and profile menu
@@ -168,9 +169,11 @@ export default function Navbar() {
                       />
                     </svg>
                   </Button>
-                  <span className='absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full'>
-                    2{/* <!-- Replace with the actual number of notifications --> */}
-                  </span>
+                  {messages > 0 && (
+                    <span className='absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full'>
+                      {messages}
+                    </span>
+                  )}
                 </Link>
               </div>
 

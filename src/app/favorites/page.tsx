@@ -1,14 +1,16 @@
 import PropertyCard from '@/components/PropertyCard';
 import { Property } from '@/types';
-import { fetchUsersFavoriteProperties } from '@/utils/propertyRequests';
+
 import { currentUser } from '@clerk/nextjs';
+import NoFavorites from './no-favorites';
+import { fetchUsersFavoriteProperties } from '@/actions/propertyActions';
 
 export default async function FavoritesPage() {
   const user = await currentUser();
   const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
   const properties = await fetchUsersFavoriteProperties(userBookmarks || []);
 
-  if (!properties || properties.length === 0) return <div>No favorite properties found</div>;
+  if (!properties || properties.length === 0) return <NoFavorites />;
   return (
     <section className='px-4 py-6'>
       <h2 className='text-3xl font-bold text-blue-500 mb-6 text-center'>Favorite Properties</h2>
