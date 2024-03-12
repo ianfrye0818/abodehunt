@@ -1,26 +1,54 @@
 'use server';
-
-import axios from 'axios';
+import connectToDB from '@/db';
+import Message from '@/models/Message';
+import { contactFormDataSchema, contactFormInputs } from '@/types';
 import { revalidatePath } from 'next/cache';
 
-const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN;
 export async function deleteMessage(id: string) {
   try {
-    await axios.delete(`${apiDomain}/messages/${id}`);
-    revalidatePath('/messages');
-    return { message: 'Message deleted!' };
+    await connectToDB();
+    const deleted = await Message.findByIdAndDelete(id);
+    if (!deleted) throw new Error('Error deleting message');
+    return { message: { success: 'Message Deleted Successfully' } };
   } catch (error) {
     console.error(['deleteMessage', error]);
-    return { message: 'Error deleting message' };
+    return { message: { error: 'Error deleting message' } };
+  } finally {
+    revalidatePath('/messages');
   }
 }
 
 export async function updateMessage(id: string, read: boolean) {
   try {
-    await axios.put(`${apiDomain}/messages/${id}`, { read: !read });
-    revalidatePath('/messages');
-    return { message: 'Message updated!' };
+    await connectToDB();
+    const message = await Message.findByIdAndUpdate(id, { read: !read });
+    if (!message) throw new Error('Error updating message');
+    return { message: { success: 'Message Updated Successfully' } };
   } catch (error) {
     console.error(['updateMessage', error]);
+    return { message: { error: 'Error updating message' } };
+  } finally {
+    revalidatePath('/messages');
+  }
+}
+
+export async function createMessage(formdata: contactFormInputs) {
+  //check that the messages are valid
+  const result = contactFormDataSchema.safeParse(formdata);
+  try {
+    if (result.success) {
+      await connectToDB();
+      const message = await Message.create(result.data);
+      if (!message) throw new Error('Error creating message');
+      return { message: { success: 'Message sent successfully!' } };
+    } else {
+      console.log(result.error.errors);
+      throw new Error('Invalid form data');
+    }
+  } catch (error) {
+    console.error(error);
+    return { message: { error } };
+  } finally {
+    revalidatePath('/messages');
   }
 }

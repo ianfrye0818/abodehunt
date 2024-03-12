@@ -2,11 +2,12 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { handleContactFormSubmit } from '@/actions/propertyActions';
-import { FaPaperPlane } from 'react-icons/fa';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactFormDataSchema, contactFormInputs } from '@/types';
+import { useToast } from '../ui/use-toast';
+import { createMessage } from '@/app/messages/messageActions';
+import { FaPaperPlane, FaSpinner } from 'react-icons/fa';
 
 type contactFormProps = {
   propertyOwner: string;
@@ -15,6 +16,7 @@ type contactFormProps = {
 };
 
 export default function ContactForm({ propertyOwner, propertyId, propertyName }: contactFormProps) {
+  const { toast } = useToast();
   const {
     handleSubmit,
     register,
@@ -24,8 +26,33 @@ export default function ContactForm({ propertyOwner, propertyId, propertyName }:
   } = useForm<contactFormInputs>({ resolver: zodResolver(contactFormDataSchema) });
 
   const onSubmit = async (data: contactFormInputs) => {
-    await handleContactFormSubmit(data);
-    reset();
+    try {
+      const messageSent = await createMessage(data);
+      if (messageSent.message.error) {
+        throw new Error(messageSent.message.error as string);
+      }
+      toast({
+        description: messageSent.message.success as string,
+        variant: 'success',
+        duration: 3000,
+      });
+      reset();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          description: error.message,
+          variant: 'error',
+          duration: 3000,
+        });
+      } else {
+        console.error(error);
+        toast({
+          description: 'An error occurred',
+          variant: 'error',
+          duration: 3000,
+        });
+      }
+    }
   };
 
   return (
@@ -113,8 +140,8 @@ export default function ContactForm({ propertyOwner, propertyId, propertyName }:
           disabled={isSubmitting}
           className='flex gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline items-center'
         >
-          <FaPaperPlane />
-          Send Message
+          {isSubmitting ? <FaSpinner className='animate-spin' /> : <FaPaperPlane />}
+          <span>Send Message</span>
         </button>
       </div>
     </form>
