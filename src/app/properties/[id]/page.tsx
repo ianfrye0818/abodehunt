@@ -7,12 +7,15 @@ import { currentUser } from '@clerk/nextjs';
 import DeletePropertyDialog from './delete-property-dialog';
 import { fetchPropertyById } from '@/actions/propertyActions';
 import ContactForm from './contact-form';
+import ShareButton from './share-button';
+import FavoritePropertyButton from './favorite-property-button';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
-  const user = await currentUser();
-
   const property = await fetchPropertyById(id);
+  const user = await currentUser();
+  const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
+  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id.toString());
 
   if (!property)
     return (
@@ -136,21 +139,17 @@ export default async function Property({ params }: { params: { id: string } }) {
                 ))}
               </ul>
             </div>
-            <div className='bg-white p-6 rounded-lg shadow-md mt-6'>
-              {/* TODO: bring in map api from google */}
-              <div id='map'>Map Goes here</div>
-            </div>
           </main>
 
           {/* <!-- Sidebar --> */}
           <aside className='space-y-4 px-4'>
-            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center gap-2'>
-              <FaBookmark /> Bookmark Property
-            </button>
-            <button className='bg-orange-500 hover:bg-orange-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center gap-2'>
-              <FaShare /> Share Property
-            </button>
-
+            {user && (
+              <FavoritePropertyButton
+                propertyId={property._id.toString()}
+                isFavorite={isFavorite as boolean}
+              />
+            )}{' '}
+            <ShareButton />
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
