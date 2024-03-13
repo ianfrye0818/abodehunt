@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchForm from '@/app/search/search-form';
 
 export default async function Hero() {
