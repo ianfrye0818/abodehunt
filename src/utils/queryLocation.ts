@@ -1,9 +1,12 @@
 'use server';
 
+import connectToDB from '@/db';
 import Property from '@/models/Property';
 import { Property as propertyType } from '@/types';
 
-export function queryLocation(searchTerm: string, propertyType?: string) {
+export async function queryLocation(searchTerm: string | undefined, propertyType?: string) {
+  (!searchTerm || searchTerm === '') && (searchTerm = '');
+
   const isZipCode = /^\d{5}(?:[-\s]\d{4})?$/.test(searchTerm);
 
   let query: any = {};
@@ -19,12 +22,14 @@ export function queryLocation(searchTerm: string, propertyType?: string) {
       ],
     };
   }
-  if (propertyType) {
-    query.type = propertyType;
-  }
 
   try {
-    const properties = Property.find(query) as unknown as propertyType[] | [];
+    await connectToDB();
+    if (propertyType !== 'all') {
+      query.type = { $regex: '.*' + propertyType + '.*', $options: 'i' };
+    }
+
+    const properties = await Property.find(query);
     if (!properties || properties.length === 0) {
       return [];
     }

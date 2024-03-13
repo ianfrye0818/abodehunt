@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { FaXmark } from 'react-icons/fa6';
 import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
 import type { Property } from '@/types';
-import ContactForm from '@/components/forms/contact-form';
 import { ImageCarousel } from '@/components/imageCarousel';
 import { currentUser } from '@clerk/nextjs';
 import DeletePropertyDialog from './delete-property-dialog';
 import { fetchPropertyById } from '@/actions/propertyActions';
+import ContactForm from './contact-form';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;

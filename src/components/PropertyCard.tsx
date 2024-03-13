@@ -4,11 +4,11 @@ import { SignedIn, currentUser } from '@clerk/nextjs';
 
 //component import
 import { FaBath, FaBed, FaHeart, FaMoneyBill, FaRuler } from 'react-icons/fa';
-import FavoriteButton from '@/app/properties/components/favorite-button';
 import { CloudinaryImageComponent } from '@/app/properties/add/cloudinary-upload-widget';
 
 //type imports
 import { Property } from '@/types';
+import FavoriteButton from './favorite-button';
 type PropertCardProps = {
   property: Property;
 };

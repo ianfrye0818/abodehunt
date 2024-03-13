@@ -1,5 +1,5 @@
-import AddPropertyForm from '@/components/forms/add-property-form';
 import React from 'react';
+import AddPropertyForm from './add-property-form';
 
 export default function AddPropertyPage() {
   return (

@@ -2,7 +2,7 @@ import { currentUser } from '@clerk/nextjs';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { fetchUserProperties } from '@/actions/propertyActions';
-import NoPropertiesPage from './no-properties';
+import NoPropertiesPage from '../../../components/no-properties';
 import ProfileListingCard from './profile-listing-card';
 import { redirect } from 'next/navigation';
 

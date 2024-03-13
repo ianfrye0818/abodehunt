@@ -1,5 +1,5 @@
 import React from 'react';
-import HeroSearchForm from './forms/hero-search-form';
+import SearchForm from '@/app/search/search-form';
 
 export default async function Hero() {
   return (
@@ -13,7 +13,7 @@ export default async function Hero() {
             Discover the perfect property that suits your needs.
           </p>
         </div>
-        <HeroSearchForm />
+        <SearchForm />
       </div>
     </section>
   );
