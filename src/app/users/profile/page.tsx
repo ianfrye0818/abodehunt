@@ -12,7 +12,7 @@ export default async function HostProfilePage() {
   const properties = await fetchUserProperties(user.id);
 
   return (
-    <section className='bg-blue-50'>
+    <section className='bg-blue-50 h-full'>
       <div className='md:container m-auto md:py-24'>
         <div className='bg-white px-6 py-8 mb-4 md:shadow-md rounded-md md:border m-0'>
           <h1 className='text-3xl font-bold mb-4'>Your Listings</h1>
