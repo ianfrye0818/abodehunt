@@ -17,7 +17,7 @@ export default function SearchForm() {
         e.preventDefault();
         router.push(`/search?location=${formState.location}&type=${formState.type}`);
       }}
-      className='flex flex-col md:flex-row items-center gap-1'
+      className='flex flex-col md:flex-row items-center gap-4 md:gap-1'
     >
       <div className='relative w-full'>
         <Input
@@ -46,7 +46,7 @@ export default function SearchForm() {
       <Button
         size='sm'
         type='submit'
-        className='block md:flex items-center w-full md:w-auto px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500'
+        className='flex items-center text-md w-full md:w-auto p-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500'
       >
         Search
       </Button>

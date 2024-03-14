@@ -12,7 +12,9 @@ export default async function Hero() {
             Discover the perfect property that suits your needs.
           </p>
         </div>
-        <SearchForm />
+        <div className='w-full md:w-auto'>
+          <SearchForm />
+        </div>
       </div>
     </section>
   );

@@ -1,9 +1,6 @@
 import DeletePropertyDialog from '@/app/properties/[id]/delete-property-dialog';
 import { CloudinaryImageComponent } from '@/app/properties/add/cloudinary-upload-widget';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Property } from '@/types';
-import { Edit2Icon } from 'lucide-react';
-
 import Link from 'next/link';
 import React from 'react';
 
@@ -24,13 +21,13 @@ export default function ProfileListingCard({ property }: { property: Property })
         </p>
       </div>
       <div className='mt-2 flex flex-col items-center gap-3'>
-        <Link
+        {/* <Link
           href=''
           className='bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-full text-center flex items-center gap-2 justify-center'
         >
           <Edit2Icon />
           Edit
-        </Link>
+        </Link> */}
         <div className='w-full'>
           <DeletePropertyDialog propertyId={property._id.toString()} />
         </div>
