@@ -21,6 +21,7 @@ export default function SearchForm() {
     >
       <div className='relative w-full'>
         <Input
+          placeholder='Location (e.g. Boston)'
           className='full md:w-[250px] w-full indent-3'
           type='search'
           value={formState.location}
