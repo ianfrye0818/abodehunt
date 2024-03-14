@@ -2,6 +2,7 @@ import React from 'react';
 import { Property } from '@/types';
 import PropertyCard from './PropertyCard';
 import { fetchAllProperties } from '@/actions/propertyActions';
+import Link from 'next/link';
 
 export default async function HomeProperties() {
   const properties = await fetchAllProperties();
@@ -32,12 +33,12 @@ export default async function HomeProperties() {
         </div>
       </section>
       <section className='m-auto max-w-lg my-10 px-6'>
-        <a
+        <Link
           href='/properties'
           className='block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700'
         >
           View All Properties
-        </a>
+        </Link>
       </section>
     </>
   );
