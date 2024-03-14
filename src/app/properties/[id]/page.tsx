@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FaXmark } from 'react-icons/fa6';
-import { FaBath, FaBed, FaBookmark, FaCheck, FaRuler, FaShare } from 'react-icons/fa';
+import { FaBath, FaBed, FaCheck, FaRuler } from 'react-icons/fa';
 import type { Property } from '@/types';
 import { ImageCarousel } from '@/components/imageCarousel';
 import { currentUser } from '@clerk/nextjs';
@@ -12,10 +12,9 @@ import FavoritePropertyButton from './favorite-property-button';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
-  const property = await fetchPropertyById(id);
+  const property = (await fetchPropertyById(id)) as Property | undefined;
   const user = await currentUser();
   const userBookmarks = user?.publicMetadata?.bookmarks as string[] | undefined;
-  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id.toString());
 
   if (!property)
     return (
@@ -23,6 +22,8 @@ export default async function Property({ params }: { params: { id: string } }) {
         Error getting property <Link href='/'>Go back</Link>
       </div>
     );
+  const isFavorite = user && userBookmarks && userBookmarks.includes(property._id.toString());
+
   return (
     <section className='bg-blue-50'>
       <div className='md:container m-auto md:py-10 md:px-6'>
@@ -149,7 +150,7 @@ export default async function Property({ params }: { params: { id: string } }) {
                 isFavorite={isFavorite as boolean}
               />
             )}{' '}
-            <ShareButton />
+            <ShareButton text={property.description ?? ''} />
             {/* <!-- Contact Form --> */}
             <div className='bg-white p-6 rounded-lg shadow-md'>
               <h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
