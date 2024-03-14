@@ -56,7 +56,7 @@ export async function createMessage(formdata: contactFormInputs) {
 export async function fetchMessages(userId: string) {
   try {
     await connectToDB();
-    const messages = await Message.find({ owner: userId });
+    const messages = await Message.find({ propertyOwnerId: userId });
     if (!messages) return [];
     return messages;
   } catch (error) {
@@ -68,7 +68,7 @@ export async function fetchMessages(userId: string) {
 export async function fetchNumberOfUnreadMessages(userId: string) {
   try {
     await connectToDB();
-    const messages = await Message.find({ owner: userId, read: false });
+    const messages = await Message.find({ propertyOwnerId: userId, read: false });
     if (!messages) return 0;
     return messages.length;
   } catch (error) {

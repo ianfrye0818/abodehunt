@@ -173,6 +173,7 @@ export default function AddPropertyForm() {
           </Label>
           <Input
             type='number'
+            min={0}
             id='beds'
             className='border rounded w-full py-2 px-3'
             {...register('beds')}
@@ -188,6 +189,7 @@ export default function AddPropertyForm() {
           </Label>
           <Input
             type='number'
+            min={0}
             id='baths'
             className='border rounded w-full py-2 px-3'
             {...register('baths')}
@@ -203,6 +205,7 @@ export default function AddPropertyForm() {
           </Label>
           <Input
             type='number'
+            min={100}
             id='square_feet'
             className='border rounded w-full py-2 px-3'
             {...register('square_feet')}
