@@ -50,7 +50,7 @@ Abode Hunt is built using the following technologies:
 - Next.JS
 - MongoDB (for database)
 - Cloudinary (for image hosting)
-- **Authentication & Authorization**:
+- Clerk (authentication and authorization)
 
 ## License
 
@@ -58,12 +58,12 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-- Special thanks to [cloudinary] for providing the tools and resources that made building Abode Hunt
-  possible.
+- Special thanks to Cloudinary and Clerk for providing the tools and resources that made building
+  Abode Hunt possible.
 
 ## Contact
 
 Have questions, suggestions, or just want to say hello? Feel free to reach out to us at
-[ian_frye@outlook.com].
+[mailto:ian_frye@outlook.com](ian_frye@outlook.com).
 
 Happy property hunting with Abode Hunt!
