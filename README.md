@@ -64,6 +64,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 Have questions, suggestions, or just want to say hello? Feel free to reach out to us at
-[mailto:ian_frye@outlook.com](ian_frye@outlook.com).
+[ian_frye@outlook.com](mailto:ian_frye@outlook.com).
 
 Happy property hunting with Abode Hunt!
