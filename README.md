@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Abode Hunt
+
+Welcome to Abode Hunt, your go-to destination for property hunting! Abode Hunt is a web application
+designed to streamline the process of finding and listing properties for rent. Whether you're a
+prospective tenant searching for your dream home or a property owner looking to rent out your space,
+Abode Hunt has you covered.
+
+## Features
+
+### For Tenants:
+
+- **Search Properties**: Easily browse through a wide range of available properties based on your
+  preferences such as location, price range, and property type.
+- **Favorite Properties**: Save properties you like to your favorites list for quick access and
+  comparison later on.
+
+- **Contact Owners**: Reach out to property owners directly through the platform to inquire about
+  more information or schedule a viewing.
+
+### For Property Owners:
+
+- **List Properties**: Create detailed listings for your properties including images, descriptions,
+  rental terms, and contact information.
+
+- **Manage Listings**: Edit, update, or remove your listings as needed to keep your property
+  information accurate and up-to-date.
+
+- **Receive Inquiries**: Field inquiries from interested tenants directly through the platform,
+  making communication seamless and efficient.
 
 ## Getting Started
 
-First, run the development server:
+To get started with Abode Hunt, simply follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the Repository**:https://github.com/ianfrye0818/abodehunt.git
+2. **Install Dependencies**: npm install
+3. **Set Up Environment Variables**: Create a `.env` file based on the provided `.env.example` file
+   and fill in the necessary environment variables.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Run the Application**:npm start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. **Explore and Enjoy**: Navigate to `http://localhost:3000` in your web browser to start exploring
+   Abode Hunt.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
 
-## Learn More
+Abode Hunt is built using the following technologies:
 
-To learn more about Next.js, take a look at the following resources:
+- **Technologies Used**:
+- Next.JS
+- MongoDB (for database)
+- Cloudinary (for image hosting)
+- **Authentication & Authorization**:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project is licensed under the [MIT License](LICENSE).
 
-## Deploy on Vercel
+## Acknowledgements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Special thanks to [cloudinary] for providing the tools and resources that made building Abode Hunt
+  possible.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+
+Have questions, suggestions, or just want to say hello? Feel free to reach out to us at
+[ian_frye@outlook.com].
+
+Happy property hunting with Abode Hunt!
