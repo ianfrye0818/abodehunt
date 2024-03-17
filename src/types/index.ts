@@ -61,3 +61,40 @@ export type Message = z.infer<typeof MessageSchema>;
 export type Property = z.infer<typeof PropertySchema>;
 export type contactFormInputs = z.infer<typeof contactFormDataSchema>;
 export type propertyFormInputs = z.infer<typeof PropertyFormSchema>;
+
+export type MapResults = {
+  status:
+    | 'ok'
+    | 'zero_results'
+    | 'over_query_limit'
+    | 'request_denied'
+    | 'invalid_request'
+    | 'unknown_error';
+  results: {
+    address_components: {
+      long_name: string;
+      short_name: string;
+      types: string[];
+    }[];
+    formatted_address: string;
+    geometry: {
+      location: {
+        lat: number;
+        lng: number;
+      };
+      location_type: string;
+      viewport: {
+        northeast: {
+          lat: number;
+          lng: number;
+        };
+        southwest: {
+          lat: number;
+          lng: number;
+        };
+      };
+    };
+    place_id: string;
+    types: string[];
+  }[];
+};

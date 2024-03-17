@@ -9,6 +9,7 @@ import { fetchPropertyById } from '@/actions/propertyActions';
 import ContactForm from './contact-form';
 import ShareButton from './share-button';
 import FavoritePropertyButton from './favorite-property-button';
+import MapBox from './mapbox';
 
 export default async function Property({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -139,6 +140,9 @@ export default async function Property({ params }: { params: { id: string } }) {
                   </li>
                 ))}
               </ul>
+            </div>
+            <div className='bg-white p-6 rounded-lg shadow-md mt-6'>
+              <MapBox location={JSON.stringify(property.location)} />
             </div>
           </main>
 
